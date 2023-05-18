@@ -21,6 +21,8 @@ namespace KarnelTravelAPI.Model
         // foreign key 
         public string User_id { get; set; }
         public virtual UserModel User { get; set; }
+        public string Tour_id { get; set; }
+        public virtual TourModel Tour { get; set; }
 
 
         public virtual ICollection<TourModel> TourModels { get; set; }
