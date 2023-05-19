@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using KarnelTravelAPI.Model.SingleServiceModel;
 
 namespace KarnelTravelAPI.Model
 {
@@ -32,5 +33,7 @@ namespace KarnelTravelAPI.Model
 
 
         public virtual ICollection<BookingModel> Bookings { get; set; }
+        //public virtual ICollection<BookSingleServiceModel> BookSingleServices { get; set; }
+
     }
 }

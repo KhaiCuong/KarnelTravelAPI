@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using KarnelTravelAPI.Model.MultiServiceModel;
 
 namespace KarnelTravelAPI.Model
 {
     public class TourModel
     {
+
         [Key]
         [Required]
         public int Tour_id { get; set; }
@@ -33,14 +35,14 @@ namespace KarnelTravelAPI.Model
 
 
         // foreign key 
-        public string Accommodation_id { get; set; }
-        public virtual AccommodationModel Accommodation { get; set; }
-        public string Restaurant_id { get; set; }
-        public virtual RestaurantModel Restaurant { get; set; }
-        public string TouristSpot_id { get; set; }
-        public virtual TouristSpotModel TouristSpot { get; set; }
-        public string Transport_id { get; set; }
-        public virtual TransportModel Transport { get; set; }
+        public virtual ICollection<MultiAccommodationModel> MultiAccommodations { get; set; }
+
+        public virtual ICollection<MultiTouristSpotModel> MultiTouristSpots { get; set; }
+
+        public virtual ICollection<MultiRestaurantModel> MultiRestaurants { get; set; }
+
+        public virtual ICollection<MultiTransportModel> MultiTransports { get; set; }
+
 
 
         public virtual ICollection<BookingModel> Bookings { get; set; }

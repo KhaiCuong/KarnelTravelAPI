@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KarnelTravelAPI.Model.SingleServiceModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace KarnelTravelAPI.Model
 {
@@ -17,8 +18,9 @@ namespace KarnelTravelAPI.Model
 
 
         // foreign key 
-        public string booking_id { get; set; }
+        public int booking_id { get; set; }
         public virtual BookingModel Booking { get; set; }
+   
 
     }
 }

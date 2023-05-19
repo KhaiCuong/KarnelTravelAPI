@@ -19,13 +19,26 @@ namespace KarnelTravelAPI.Model
         public DateTime update_at { get; }
 
         // foreign key 
-        public string User_id { get; set; }
+        //public string User_id { get; set; }
+        //public virtual UserModel User { get; set; }
+        //public string Tour_id { get; set; }
+        //public virtual TourModel Tour { get; set; }
+
+
+        public int User_id { get; set; }
         public virtual UserModel User { get; set; }
-        public string Tour_id { get; set; }
-        public virtual TourModel Tour { get; set; }
+        public int? Tour_id { get; set; }
+        public virtual TourModel? Tour { get; set; }
+        public string? Accommodation_id { get; set; }
+        public virtual AccommodationModel? Accommodation { get; set; }
+        public string? Restaurant_id { get; set; }
+        public virtual RestaurantModel? Restaurant { get; set; }
+        public string? TouristSpot_id { get; set; }
+        public virtual TouristSpotModel? TouristSpot { get; set; }
+        public string? Transport_id { get; set; }
+        public virtual TransportModel? Transport { get; set; }
 
-
-        public virtual ICollection<TourModel> TourModels { get; set; }
+        public virtual ICollection<FeedbackModel> Feedbacks { get; set; }
 
     }
 }

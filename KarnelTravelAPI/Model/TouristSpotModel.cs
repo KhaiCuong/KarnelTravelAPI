@@ -1,6 +1,8 @@
 ﻿using KarnelTravelAPI.Model.ImageModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using KarnelTravelAPI.Model.MultiServiceModel;
+using KarnelTravelAPI.Model.SingleServiceModel;
 
 namespace KarnelTravelAPI.Model
 {
@@ -14,6 +16,9 @@ namespace KarnelTravelAPI.Model
         public string TouristSpot_name { get; set; }
         public string? Activities { get; set; }
         public string? Description { get; set; }
+        [DataType(DataType.Currency)]
+        [Range(1, 100000000000, ErrorMessage = "Quantity must be greater than 1")]
+        public decimal Price { get; set; }
 
         [default: DateTime.now]
         public DateTime created_at { get; }
@@ -27,7 +32,11 @@ namespace KarnelTravelAPI.Model
 
 
         public virtual ICollection<TouristSpotImageModel> TouristSpotImages { get; set; }
-        public virtual ICollection<TourModel> TourModels { get; set; }
+        public virtual ICollection<MultiTouristSpotModel> MultiTouristSpots { get; set; }
+        //public virtual ICollection<BookSingleServiceModel> BookSingleServices { get; set; }
+        public virtual ICollection<BookingModel> Bookings { get; set; }
+
+
 
 
     }
