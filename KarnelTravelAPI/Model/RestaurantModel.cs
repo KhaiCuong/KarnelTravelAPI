@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using KarnelTravelAPI.Model.MultiServiceModel;
-using KarnelTravelAPI.Model.SingleServiceModel;
 
 namespace KarnelTravelAPI.Model
 {

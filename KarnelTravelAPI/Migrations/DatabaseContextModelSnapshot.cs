@@ -422,6 +422,15 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Charge_card")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("Phone_number")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

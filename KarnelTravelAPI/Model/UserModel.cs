@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using KarnelTravelAPI.Model.SingleServiceModel;
 
 namespace KarnelTravelAPI.Model
 {
@@ -11,7 +10,7 @@ namespace KarnelTravelAPI.Model
         [Required]
         public int User_id { get; set; }
         [Required]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be 3-20 characters")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be 3-30 characters")]
         public string User_name { get; set; }
         [Required]
         public string Phone_number { get; set; }
@@ -22,6 +21,15 @@ namespace KarnelTravelAPI.Model
         [DefaultValue("Silver")]
         public string member_lever { get; set; }
         public string? Charge_card { get; set; }
+
+        //login
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "Password must be 6-20 characters")]
+        public string Password { get; set; }
+
 
 
         [default: DateTime.now]

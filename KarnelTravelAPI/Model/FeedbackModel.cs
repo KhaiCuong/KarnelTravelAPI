@@ -1,5 +1,4 @@
-﻿using KarnelTravelAPI.Model.SingleServiceModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace KarnelTravelAPI.Model
 {

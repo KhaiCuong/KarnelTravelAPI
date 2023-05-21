@@ -1,6 +1,5 @@
 ﻿using KarnelTravelAPI.Model.ImageModel;
 using KarnelTravelAPI.Model.MultiServiceModel;
-using KarnelTravelAPI.Model.SingleServiceModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace KarnelTravelAPI.Model

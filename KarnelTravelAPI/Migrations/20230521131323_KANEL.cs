@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KarnelTravelAPI.Migrations
 {
-    public partial class KarnelTravel : Migration
+    public partial class KANEL : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,7 +51,9 @@ namespace KarnelTravelAPI.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isAdmin = table.Column<bool>(type: "bit", nullable: false),
                     member_lever = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Charge_card = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Charge_card = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -149,8 +151,8 @@ namespace KarnelTravelAPI.Migrations
                 columns: table => new
                 {
                     Transport_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Transport_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Start_position = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Transport_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Location_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },

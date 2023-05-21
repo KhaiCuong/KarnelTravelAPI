@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KarnelTravelAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230519073455_KarnelTravel")]
-    partial class KarnelTravel
+    [Migration("20230521131323_KANEL")]
+    partial class KANEL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -423,6 +423,15 @@ namespace KarnelTravelAPI.Migrations
 
                     b.Property<string>("Charge_card")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Phone_number")
                         .IsRequired()
