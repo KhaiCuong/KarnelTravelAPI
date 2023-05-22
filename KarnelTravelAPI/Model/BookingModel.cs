@@ -12,7 +12,6 @@ namespace KarnelTravelAPI.Model
         [Required]
         [Range(1, 100, ErrorMessage = "Quantity must be greater than 1")]
         public int Quantity { get; set; }
-
         [default: DateTime.now]
         public DateTime created_at { get; }
         [default: DateTime.now]
@@ -39,6 +38,8 @@ namespace KarnelTravelAPI.Model
         public virtual TransportModel? Transport { get; set; }
 
         public virtual ICollection<FeedbackModel> Feedbacks { get; set; }
+        public virtual ICollection<PaymentModel> Payments { get; set; }
+
 
     }
 }

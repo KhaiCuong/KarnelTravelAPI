@@ -18,6 +18,9 @@ namespace KarnelTravelAPI.Model
         [DataType(DataType.Currency)]
         [Range(1, 100000000000, ErrorMessage = "Quantity must be greater than 1")]
         public decimal Price { get; set; }
+        [Required]
+        public bool Status_TouristSpot { get; set; }
+        public int? Discount { get; set; }
 
         [default: DateTime.now]
         public DateTime created_at { get; }
@@ -31,7 +34,7 @@ namespace KarnelTravelAPI.Model
 
 
         public virtual ICollection<TouristSpotImageModel> TouristSpotImages { get; set; }
-        public virtual ICollection<MultiTouristSpotModel> MultiTouristSpots { get; set; }
+        public virtual ICollection<TouristSpotTourModel> TouristSpotTours { get; set; }
         //public virtual ICollection<BookSingleServiceModel> BookSingleServices { get; set; }
         public virtual ICollection<BookingModel> Bookings { get; set; }
 

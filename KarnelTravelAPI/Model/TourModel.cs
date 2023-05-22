@@ -14,10 +14,11 @@ namespace KarnelTravelAPI.Model
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be 3-20 characters")]
         public string Tour_name { get; set; }
         [Required]
-        [Range(1, 100, ErrorMessage = "Quantity must be 1-100")]
-        public int Quantity { get; set; }
+        public bool Status_tour { get; set; }
+        public int? Discount { get; set; }
         [Required]
         public DateTime Depature_date { get; set; }
+
         [Required]
         [Range(1, 100, ErrorMessage = "Quantity must be greater than 1")]
         public int Times { get; set; }
@@ -34,16 +35,13 @@ namespace KarnelTravelAPI.Model
 
 
 
-        // foreign key 
-        public virtual ICollection<MultiAccommodationModel> MultiAccommodations { get; set; }
+        public virtual ICollection<AccommodationTourModel> AccommodationTours { get; set; }
 
-        public virtual ICollection<MultiTouristSpotModel> MultiTouristSpots { get; set; }
+        public virtual ICollection<TouristSpotTourModel> TouristSpotTours { get; set; }
 
-        public virtual ICollection<MultiRestaurantModel> MultiRestaurants { get; set; }
+        public virtual ICollection<RestaurantTourModel> RestaurantTours { get; set; }
 
-        public virtual ICollection<MultiTransportModel> MultiTransports { get; set; }
-
-
+        public virtual ICollection<TransportTourModel> TransportTours { get; set; }
 
         public virtual ICollection<BookingModel> Bookings { get; set; }
 

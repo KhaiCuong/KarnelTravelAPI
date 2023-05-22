@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KarnelTravelAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230521131323_KANEL")]
-    partial class KANEL
+    [Migration("20230522135952_KarnelTravel")]
+    partial class KarnelTravel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,9 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location_id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -46,6 +49,12 @@ namespace KarnelTravelAPI.Migrations
 
                     b.Property<int>("Rate")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Status_Accommodation")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Type")
+                        .HasColumnType("bit");
 
                     b.HasKey("Accommodation_id");
 
@@ -107,6 +116,9 @@ namespace KarnelTravelAPI.Migrations
 
                     b.Property<int>("Rate")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Status_Feedback")
+                        .HasColumnType("bit");
 
                     b.Property<int>("booking_id")
                         .HasColumnType("int");
@@ -224,12 +236,15 @@ namespace KarnelTravelAPI.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<bool>("Status_Location")
+                        .HasColumnType("bit");
+
                     b.HasKey("Location_id");
 
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiAccommodationModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.AccommodationTourModel", b =>
                 {
                     b.Property<string>("Accommodation_id")
                         .HasColumnType("nvarchar(450)");
@@ -241,10 +256,10 @@ namespace KarnelTravelAPI.Migrations
 
                     b.HasIndex("Tour_id");
 
-                    b.ToTable("MultiAccommodations");
+                    b.ToTable("AccommodationTours");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiRestaurantModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.RestaurantTourModel", b =>
                 {
                     b.Property<string>("Restaurant_id")
                         .HasColumnType("nvarchar(450)");
@@ -256,10 +271,10 @@ namespace KarnelTravelAPI.Migrations
 
                     b.HasIndex("Tour_id");
 
-                    b.ToTable("MultiRestaurants");
+                    b.ToTable("RestaurantTours");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiTouristSpotModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.TouristSpotTourModel", b =>
                 {
                     b.Property<string>("TouristSpot_id")
                         .HasColumnType("nvarchar(450)");
@@ -271,10 +286,10 @@ namespace KarnelTravelAPI.Migrations
 
                     b.HasIndex("Tour_id");
 
-                    b.ToTable("MultiTouristSpots");
+                    b.ToTable("TouristSpotTours");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiTransportModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.TransportTourModel", b =>
                 {
                     b.Property<string>("Transport_id")
                         .HasColumnType("nvarchar(450)");
@@ -286,7 +301,33 @@ namespace KarnelTravelAPI.Migrations
 
                     b.HasIndex("Tour_id");
 
-                    b.ToTable("MultiTransports");
+                    b.ToTable("TransportTours");
+                });
+
+            modelBuilder.Entity("KarnelTravelAPI.Model.PaymentModel", b =>
+                {
+                    b.Property<int>("Payment_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Payment_id"), 1L, 1);
+
+                    b.Property<int>("Booking_id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status_payment")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("UserModelUser_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Payment_id");
+
+                    b.HasIndex("Booking_id");
+
+                    b.HasIndex("UserModelUser_id");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.RestaurantModel", b =>
@@ -296,6 +337,9 @@ namespace KarnelTravelAPI.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Location_id")
                         .IsRequired()
@@ -311,6 +355,9 @@ namespace KarnelTravelAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<bool>("Status_Restaurant")
+                        .HasColumnType("bit");
 
                     b.HasKey("Restaurant_id");
 
@@ -330,12 +377,18 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location_id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Status_TouristSpot")
+                        .HasColumnType("bit");
 
                     b.Property<string>("TouristSpot_name")
                         .IsRequired()
@@ -363,11 +416,14 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<bool>("Status_tour")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Times")
                         .HasColumnType("int");
@@ -387,6 +443,9 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Transport_id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location_id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -397,6 +456,9 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Start_position")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status_Transport")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Transport_name")
                         .IsRequired()
@@ -437,6 +499,12 @@ namespace KarnelTravelAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Status_User")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Total_payment")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("User_name")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -444,10 +512,6 @@ namespace KarnelTravelAPI.Migrations
 
                     b.Property<bool>("isAdmin")
                         .HasColumnType("bit");
-
-                    b.Property<string>("member_lever")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("User_id");
 
@@ -561,16 +625,16 @@ namespace KarnelTravelAPI.Migrations
                     b.Navigation("TouristSpot");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiAccommodationModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.AccommodationTourModel", b =>
                 {
                     b.HasOne("KarnelTravelAPI.Model.AccommodationModel", "Accommodations")
-                        .WithMany("MultiAccommodations")
+                        .WithMany("AccommodationTours")
                         .HasForeignKey("Accommodation_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KarnelTravelAPI.Model.TourModel", "Tours")
-                        .WithMany("MultiAccommodations")
+                        .WithMany("AccommodationTours")
                         .HasForeignKey("Tour_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -580,16 +644,16 @@ namespace KarnelTravelAPI.Migrations
                     b.Navigation("Tours");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiRestaurantModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.RestaurantTourModel", b =>
                 {
                     b.HasOne("KarnelTravelAPI.Model.RestaurantModel", "Restaurants")
-                        .WithMany("MultiRestaurants")
+                        .WithMany("RestaurantTours")
                         .HasForeignKey("Restaurant_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KarnelTravelAPI.Model.TourModel", "Tours")
-                        .WithMany("MultiRestaurants")
+                        .WithMany("RestaurantTours")
                         .HasForeignKey("Tour_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -599,16 +663,16 @@ namespace KarnelTravelAPI.Migrations
                     b.Navigation("Tours");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiTouristSpotModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.TouristSpotTourModel", b =>
                 {
                     b.HasOne("KarnelTravelAPI.Model.TourModel", "Tours")
-                        .WithMany("MultiTouristSpots")
+                        .WithMany("TouristSpotTours")
                         .HasForeignKey("Tour_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KarnelTravelAPI.Model.TouristSpotModel", "TouristSpots")
-                        .WithMany("MultiTouristSpots")
+                        .WithMany("TouristSpotTours")
                         .HasForeignKey("TouristSpot_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -618,16 +682,16 @@ namespace KarnelTravelAPI.Migrations
                     b.Navigation("Tours");
                 });
 
-            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.MultiTransportModel", b =>
+            modelBuilder.Entity("KarnelTravelAPI.Model.MultiServiceModel.TransportTourModel", b =>
                 {
                     b.HasOne("KarnelTravelAPI.Model.TourModel", "Tours")
-                        .WithMany("MultiTransports")
+                        .WithMany("TransportTours")
                         .HasForeignKey("Tour_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KarnelTravelAPI.Model.TransportModel", "Transports")
-                        .WithMany("MultiTransports")
+                        .WithMany("TransportTours")
                         .HasForeignKey("Transport_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -635,6 +699,21 @@ namespace KarnelTravelAPI.Migrations
                     b.Navigation("Tours");
 
                     b.Navigation("Transports");
+                });
+
+            modelBuilder.Entity("KarnelTravelAPI.Model.PaymentModel", b =>
+                {
+                    b.HasOne("KarnelTravelAPI.Model.BookingModel", "Booking")
+                        .WithMany("Payments")
+                        .HasForeignKey("Booking_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KarnelTravelAPI.Model.UserModel", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("UserModelUser_id");
+
+                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.RestaurantModel", b =>
@@ -674,14 +753,16 @@ namespace KarnelTravelAPI.Migrations
                 {
                     b.Navigation("AccommodationImages");
 
-                    b.Navigation("Bookings");
+                    b.Navigation("AccommodationTours");
 
-                    b.Navigation("MultiAccommodations");
+                    b.Navigation("Bookings");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.BookingModel", b =>
                 {
                     b.Navigation("Feedbacks");
+
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.LocationModel", b =>
@@ -701,43 +782,45 @@ namespace KarnelTravelAPI.Migrations
                 {
                     b.Navigation("Bookings");
 
-                    b.Navigation("MultiRestaurants");
-
                     b.Navigation("RestaurantImages");
+
+                    b.Navigation("RestaurantTours");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.TouristSpotModel", b =>
                 {
                     b.Navigation("Bookings");
 
-                    b.Navigation("MultiTouristSpots");
-
                     b.Navigation("TouristSpotImages");
+
+                    b.Navigation("TouristSpotTours");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.TourModel", b =>
                 {
+                    b.Navigation("AccommodationTours");
+
                     b.Navigation("Bookings");
 
-                    b.Navigation("MultiAccommodations");
+                    b.Navigation("RestaurantTours");
 
-                    b.Navigation("MultiRestaurants");
+                    b.Navigation("TouristSpotTours");
 
-                    b.Navigation("MultiTouristSpots");
-
-                    b.Navigation("MultiTransports");
+                    b.Navigation("TransportTours");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.TransportModel", b =>
                 {
                     b.Navigation("Bookings");
 
-                    b.Navigation("MultiTransports");
+                    b.Navigation("TransportTours");
                 });
 
             modelBuilder.Entity("KarnelTravelAPI.Model.UserModel", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("Payments");
                 });
 #pragma warning restore 612, 618
         }

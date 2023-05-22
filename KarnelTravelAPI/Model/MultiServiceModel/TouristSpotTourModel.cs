@@ -1,6 +1,6 @@
 ﻿namespace KarnelTravelAPI.Model.MultiServiceModel
 {
-    public class MultiTouristSpotModel
+    public class TouristSpotTourModel
     {
         public int Tour_id { get; set; }
         public virtual TourModel Tours { get; set; }

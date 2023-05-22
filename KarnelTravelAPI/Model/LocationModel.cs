@@ -16,6 +16,9 @@ namespace KarnelTravelAPI.Model
         public string Location_name { get; set; }
         public string? Description { get; set; }
 
+        [Required]
+        public bool Status_Location { get; set; }
+
         [default: DateTime.now]
         public DateTime created_at { get; }
         [default: DateTime.now]

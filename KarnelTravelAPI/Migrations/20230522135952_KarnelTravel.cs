@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KarnelTravelAPI.Migrations
 {
-    public partial class KANEL : Migration
+    public partial class KarnelTravel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,8 @@ namespace KarnelTravelAPI.Migrations
                 {
                     Location_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Location_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status_Location = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,8 @@ namespace KarnelTravelAPI.Migrations
                     Tour_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Tour_name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Status_tour = table.Column<bool>(type: "bit", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: true),
                     Depature_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Times = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -50,8 +52,9 @@ namespace KarnelTravelAPI.Migrations
                     Phone_number = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isAdmin = table.Column<bool>(type: "bit", nullable: false),
-                    member_lever = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Total_payment = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Charge_card = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status_User = table.Column<bool>(type: "bit", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
@@ -67,8 +70,11 @@ namespace KarnelTravelAPI.Migrations
                     Accommodation_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Accommodation_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Rate = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status_Accommodation = table.Column<bool>(type: "bit", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: true),
                     Location_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -111,6 +117,8 @@ namespace KarnelTravelAPI.Migrations
                     Rate = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status_Restaurant = table.Column<bool>(type: "bit", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: true),
                     Location_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -133,6 +141,8 @@ namespace KarnelTravelAPI.Migrations
                     Activities = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status_TouristSpot = table.Column<bool>(type: "bit", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: true),
                     Location_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -154,6 +164,8 @@ namespace KarnelTravelAPI.Migrations
                     Start_position = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Transport_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status_Transport = table.Column<bool>(type: "bit", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: true),
                     Location_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -188,7 +200,7 @@ namespace KarnelTravelAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MultiAccommodations",
+                name: "AccommodationTours",
                 columns: table => new
                 {
                     Accommodation_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -196,39 +208,15 @@ namespace KarnelTravelAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MultiAccommodations", x => x.Accommodation_id);
+                    table.PrimaryKey("PK_AccommodationTours", x => x.Accommodation_id);
                     table.ForeignKey(
-                        name: "FK_MultiAccommodations_Accommodations_Accommodation_id",
+                        name: "FK_AccommodationTours_Accommodations_Accommodation_id",
                         column: x => x.Accommodation_id,
                         principalTable: "Accommodations",
                         principalColumn: "Accommodation_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MultiAccommodations_Tours_Tour_id",
-                        column: x => x.Tour_id,
-                        principalTable: "Tours",
-                        principalColumn: "Tour_id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MultiRestaurants",
-                columns: table => new
-                {
-                    Restaurant_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Tour_id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MultiRestaurants", x => x.Restaurant_id);
-                    table.ForeignKey(
-                        name: "FK_MultiRestaurants_Restaurants_Restaurant_id",
-                        column: x => x.Restaurant_id,
-                        principalTable: "Restaurants",
-                        principalColumn: "Restaurant_id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MultiRestaurants_Tours_Tour_id",
+                        name: "FK_AccommodationTours_Tours_Tour_id",
                         column: x => x.Tour_id,
                         principalTable: "Tours",
                         principalColumn: "Tour_id",
@@ -256,23 +244,23 @@ namespace KarnelTravelAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MultiTouristSpots",
+                name: "RestaurantTours",
                 columns: table => new
                 {
-                    TouristSpot_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Restaurant_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Tour_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MultiTouristSpots", x => x.TouristSpot_id);
+                    table.PrimaryKey("PK_RestaurantTours", x => x.Restaurant_id);
                     table.ForeignKey(
-                        name: "FK_MultiTouristSpots_TouristSpots_TouristSpot_id",
-                        column: x => x.TouristSpot_id,
-                        principalTable: "TouristSpots",
-                        principalColumn: "TouristSpot_id",
+                        name: "FK_RestaurantTours_Restaurants_Restaurant_id",
+                        column: x => x.Restaurant_id,
+                        principalTable: "Restaurants",
+                        principalColumn: "Restaurant_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MultiTouristSpots_Tours_Tour_id",
+                        name: "FK_RestaurantTours_Tours_Tour_id",
                         column: x => x.Tour_id,
                         principalTable: "Tours",
                         principalColumn: "Tour_id",
@@ -296,6 +284,30 @@ namespace KarnelTravelAPI.Migrations
                         column: x => x.TouristSpot_id,
                         principalTable: "TouristSpots",
                         principalColumn: "TouristSpot_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TouristSpotTours",
+                columns: table => new
+                {
+                    TouristSpot_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Tour_id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TouristSpotTours", x => x.TouristSpot_id);
+                    table.ForeignKey(
+                        name: "FK_TouristSpotTours_TouristSpots_TouristSpot_id",
+                        column: x => x.TouristSpot_id,
+                        principalTable: "TouristSpots",
+                        principalColumn: "TouristSpot_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TouristSpotTours_Tours_Tour_id",
+                        column: x => x.Tour_id,
+                        principalTable: "Tours",
+                        principalColumn: "Tour_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -350,7 +362,7 @@ namespace KarnelTravelAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MultiTransports",
+                name: "TransportTours",
                 columns: table => new
                 {
                     Transport_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -358,15 +370,15 @@ namespace KarnelTravelAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MultiTransports", x => x.Transport_id);
+                    table.PrimaryKey("PK_TransportTours", x => x.Transport_id);
                     table.ForeignKey(
-                        name: "FK_MultiTransports_Tours_Tour_id",
+                        name: "FK_TransportTours_Tours_Tour_id",
                         column: x => x.Tour_id,
                         principalTable: "Tours",
                         principalColumn: "Tour_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MultiTransports_Transports_Transport_id",
+                        name: "FK_TransportTours_Transports_Transport_id",
                         column: x => x.Transport_id,
                         principalTable: "Transports",
                         principalColumn: "Transport_id",
@@ -380,6 +392,7 @@ namespace KarnelTravelAPI.Migrations
                     Feedback_id = table.Column<int>(type: "int", nullable: false),
                     content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rate = table.Column<int>(type: "int", nullable: false),
+                    Status_Feedback = table.Column<bool>(type: "bit", nullable: false),
                     booking_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -393,6 +406,32 @@ namespace KarnelTravelAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Payment_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status_payment = table.Column<bool>(type: "bit", nullable: false),
+                    Booking_id = table.Column<int>(type: "int", nullable: false),
+                    UserModelUser_id = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Payment_id);
+                    table.ForeignKey(
+                        name: "FK_Payments_Bookings_Booking_id",
+                        column: x => x.Booking_id,
+                        principalTable: "Bookings",
+                        principalColumn: "booking_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Payments_Users_UserModelUser_id",
+                        column: x => x.UserModelUser_id,
+                        principalTable: "Users",
+                        principalColumn: "User_id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AccommodationImages_Accommodation_id",
                 table: "AccommodationImages",
@@ -402,6 +441,11 @@ namespace KarnelTravelAPI.Migrations
                 name: "IX_Accommodations_Location_id",
                 table: "Accommodations",
                 column: "Location_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationTours_Tour_id",
+                table: "AccommodationTours",
+                column: "Tour_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_Accommodation_id",
@@ -439,24 +483,14 @@ namespace KarnelTravelAPI.Migrations
                 column: "Location_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MultiAccommodations_Tour_id",
-                table: "MultiAccommodations",
-                column: "Tour_id");
+                name: "IX_Payments_Booking_id",
+                table: "Payments",
+                column: "Booking_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MultiRestaurants_Tour_id",
-                table: "MultiRestaurants",
-                column: "Tour_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MultiTouristSpots_Tour_id",
-                table: "MultiTouristSpots",
-                column: "Tour_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MultiTransports_Tour_id",
-                table: "MultiTransports",
-                column: "Tour_id");
+                name: "IX_Payments_UserModelUser_id",
+                table: "Payments",
+                column: "UserModelUser_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RestaurantImages_Restaurant_id",
@@ -469,6 +503,11 @@ namespace KarnelTravelAPI.Migrations
                 column: "Location_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RestaurantTours_Tour_id",
+                table: "RestaurantTours",
+                column: "Tour_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TouristSpotImages_TouristSpot_id",
                 table: "TouristSpotImages",
                 column: "TouristSpot_id");
@@ -479,9 +518,19 @@ namespace KarnelTravelAPI.Migrations
                 column: "Location_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TouristSpotTours_Tour_id",
+                table: "TouristSpotTours",
+                column: "Tour_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Transports_Location_id",
                 table: "Transports",
                 column: "Location_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TransportTours_Tour_id",
+                table: "TransportTours",
+                column: "Tour_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -490,28 +539,31 @@ namespace KarnelTravelAPI.Migrations
                 name: "AccommodationImages");
 
             migrationBuilder.DropTable(
+                name: "AccommodationTours");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
                 name: "LocationImages");
 
             migrationBuilder.DropTable(
-                name: "MultiAccommodations");
-
-            migrationBuilder.DropTable(
-                name: "MultiRestaurants");
-
-            migrationBuilder.DropTable(
-                name: "MultiTouristSpots");
-
-            migrationBuilder.DropTable(
-                name: "MultiTransports");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "RestaurantImages");
 
             migrationBuilder.DropTable(
+                name: "RestaurantTours");
+
+            migrationBuilder.DropTable(
                 name: "TouristSpotImages");
+
+            migrationBuilder.DropTable(
+                name: "TouristSpotTours");
+
+            migrationBuilder.DropTable(
+                name: "TransportTours");
 
             migrationBuilder.DropTable(
                 name: "Bookings");

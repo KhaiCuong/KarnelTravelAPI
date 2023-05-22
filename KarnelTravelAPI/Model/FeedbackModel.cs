@@ -11,6 +11,8 @@ namespace KarnelTravelAPI.Model
         [Required]
         [Range(1, 5, ErrorMessage = "Rate must be 1-5 start")]
         public int Rate { get; set; }
+        [Required]
+        public bool Status_Feedback { get; set; }
 
         [default: DateTime.now]
         public DateTime created_at { get; }
