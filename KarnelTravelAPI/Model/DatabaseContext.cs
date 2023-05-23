@@ -12,51 +12,51 @@ namespace KarnelTravelAPI.Model
             // *** Intermediate table
             // TourModel - AccommodationModel (intermediate table : MultiAccommodationModel)
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MultiAccommodationModel>()
+            modelBuilder.Entity<AccommodationTourModel>()
             .HasKey(t => new { t.Accommodation_id });
-            modelBuilder.Entity<MultiAccommodationModel>()
+            modelBuilder.Entity<AccommodationTourModel>()
                 .HasOne(e => e.Accommodations)
-                .WithMany(e => e.MultiAccommodations)
+                .WithMany(e => e.AccommodationTours)
                 .HasForeignKey(e => e.Accommodation_id);
-            modelBuilder.Entity<MultiAccommodationModel>()
+            modelBuilder.Entity<AccommodationTourModel>()
                 .HasOne(e => e.Tours)
-                .WithMany(e => e.MultiAccommodations)
+                .WithMany(e => e.AccommodationTours)
                 .HasForeignKey(e => e.Tour_id);
             // TourModel - RestauranModel (intermediate table : MultiRestaurantModel)
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MultiRestaurantModel>()
+            modelBuilder.Entity<RestaurantTourModel>()
             .HasKey(t => new { t.Restaurant_id });
-            modelBuilder.Entity<MultiRestaurantModel>()
+            modelBuilder.Entity<RestaurantTourModel>()
                 .HasOne(e => e.Restaurants)
-                .WithMany(e => e.MultiRestaurants)
+                .WithMany(e => e.RestaurantTours)
                 .HasForeignKey(e => e.Restaurant_id);
-            modelBuilder.Entity<MultiRestaurantModel>()
+            modelBuilder.Entity<RestaurantTourModel>()
                 .HasOne(e => e.Tours)
-                .WithMany(e => e.MultiRestaurants)
+                .WithMany(e => e.RestaurantTours)
                 .HasForeignKey(e => e.Tour_id);
             // TourModel - TouristSpotModel (intermediate table : MultiTouristSpotModel)
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MultiTouristSpotModel>()
+            modelBuilder.Entity<TouristSpotTourModel>()
             .HasKey(t => new { t.TouristSpot_id });
-            modelBuilder.Entity<MultiTouristSpotModel>()
+            modelBuilder.Entity<TouristSpotTourModel>()
                 .HasOne(e => e.TouristSpots)
-                .WithMany(e => e.MultiTouristSpots)
+                .WithMany(e => e.TouristSpotTours)
                 .HasForeignKey(e => e.TouristSpot_id);
-            modelBuilder.Entity<MultiTouristSpotModel>()
+            modelBuilder.Entity<TouristSpotTourModel>()
                 .HasOne(e => e.Tours)
-                .WithMany(e => e.MultiTouristSpots)
+                .WithMany(e => e.TouristSpotTours)
                 .HasForeignKey(e => e.Tour_id);
             // TourModel - TouristSpotModel (intermediate table : MultiTransportModel)
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MultiTransportModel>()
+            modelBuilder.Entity<TransportTourModel>()
             .HasKey(t => new { t.Transport_id });
-            modelBuilder.Entity<MultiTransportModel>()
+            modelBuilder.Entity<TransportTourModel>()
                 .HasOne(e => e.Transports)
-                .WithMany(e => e.MultiTransports)
+                .WithMany(e => e.TransportTours)
                 .HasForeignKey(e => e.Transport_id);
-            modelBuilder.Entity<MultiTransportModel>()
+            modelBuilder.Entity<TransportTourModel>()
                 .HasOne(e => e.Tours)
-                .WithMany(e => e.MultiTransports)
+                .WithMany(e => e.TransportTours)
                 .HasForeignKey(e => e.Tour_id);
 
 
@@ -127,6 +127,14 @@ namespace KarnelTravelAPI.Model
                    .HasForeignKey(e => e.Feedback_id);
 
 
+
+            // Payment
+            modelBuilder.Entity<PaymentModel>()
+                    .HasOne(e => e.Booking)
+                    .WithMany(e => e.Payments)
+                    .HasForeignKey(e => e.Booking_id);
+
+
             // Book single service
             //modelBuilder.Entity<BookSingleServiceModel>()
             //            .HasOne(e => e.Accommodation)
@@ -186,13 +194,14 @@ namespace KarnelTravelAPI.Model
         public DbSet<TransportModel> Transports { get; set; }
         public DbSet<UserModel> Users { get; set; }
         public DbSet<AccommodationImageModel> AccommodationImages { get; set; }
+        public DbSet<PaymentModel> Payments { get; set; }
         public DbSet<LocationImageModel> LocationImages { get; set; }
         public DbSet<RestaurantImageModel> RestaurantImages { get; set; }
         public DbSet<TouristSpotImageModel> TouristSpotImages { get; set; }
-        public DbSet<MultiAccommodationModel> MultiAccommodations { get; set; }
-        public DbSet<MultiRestaurantModel> MultiRestaurants { get; set; }
-        public DbSet<MultiTouristSpotModel> MultiTouristSpots { get; set; }
-        public DbSet<MultiTransportModel> MultiTransports { get; set; }
+        public DbSet<AccommodationTourModel> AccommodationTours { get; set; }
+        public DbSet<RestaurantTourModel> RestaurantTours { get; set; }
+        public DbSet<TouristSpotTourModel> TouristSpotTours { get; set; }
+        public DbSet<TransportTourModel> TransportTours { get; set; }
         //public DbSet<BookSingleServiceModel> BookSingleServices { get; set; }
         //public DbSet<FeedbackSingleServiceModel> FeedbackSingleServices { get; set; }
 

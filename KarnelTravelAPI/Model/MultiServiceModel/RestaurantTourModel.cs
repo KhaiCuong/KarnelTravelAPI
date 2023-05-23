@@ -1,19 +1,16 @@
 ﻿namespace KarnelTravelAPI.Model.MultiServiceModel
 {
-    public class MultiTransportModel
+    public class RestaurantTourModel
     {
+
         public int Tour_id { get; set; }
         public virtual TourModel Tours { get; set; }
-        public string Transport_id { get; set; }
-        public virtual TransportModel Transports { get; set; }
+        public string Restaurant_id { get; set; }
+        public virtual RestaurantModel Restaurants { get; set; }
 
 
 
         [default: DateTime.now]
         public DateTime created_at { get; }
-
-
-
-        
     }
 }

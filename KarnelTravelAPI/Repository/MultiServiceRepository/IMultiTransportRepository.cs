@@ -4,8 +4,8 @@ namespace KarnelTravelAPI.Repository.MultiServiceRepository
 {
     public interface IMultiTransportRepository
     {
-        Task<IEnumerable<MultiTransportModel>> GetMultiTransportById(string Transport_id);
-        Task<MultiTransportModel> AddMultiTransport(MultiTransportModel Transport);
-        Task<MultiTransportModel> DeleteMultiTransport(MultiTransportModel Transport);
+        Task<IEnumerable<TransportTourModel>> GetMultiTransportById(string Transport_id);
+        Task<TransportTourModel> AddMultiTransport(TransportTourModel Transport);
+        Task<TransportTourModel> DeleteMultiTransport(TransportTourModel Transport);
     }
 }

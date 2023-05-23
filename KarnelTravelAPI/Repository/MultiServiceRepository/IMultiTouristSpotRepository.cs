@@ -4,8 +4,8 @@ namespace KarnelTravelAPI.Repository.MultiServiceRepository
 {
     public interface IMultiTouristSpotRepository
     {
-        Task<IEnumerable<MultiTouristSpotModel>> GetMultiTouristSpotById(string TouristSpot_id);
-        Task<MultiTouristSpotModel> AddMultiTouristSpot(MultiTouristSpotModel TouristSpot);
-        Task<MultiTouristSpotModel> DeleteMultiTouristSpot(MultiTouristSpotModel TouristSpot);
+        Task<IEnumerable<TouristSpotTourModel>> GetMultiTouristSpotById(string TouristSpot_id);
+        Task<TouristSpotTourModel> AddMultiTouristSpot(TouristSpotTourModel TouristSpot);
+        Task<TouristSpotTourModel> DeleteMultiTouristSpot(TouristSpotTourModel TouristSpot);
     }
 }

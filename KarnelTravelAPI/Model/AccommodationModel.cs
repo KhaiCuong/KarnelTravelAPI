@@ -17,10 +17,16 @@ namespace KarnelTravelAPI.Model
         [Required]
         [Range(1,5, ErrorMessage = "Rate must be 1-5 start")]
         public int Rate { get; set; }
+        [Required]
+        public bool Type { get; set; } // 1 is Resort , 0 is Hotel
         public string? Description { get; set; }
         [DataType(DataType.Currency)]
         [Range(1, 100000000000, ErrorMessage = "Quantity must be greater than 1")]
         public decimal Price { get; set; }
+
+        [Required]
+        public bool Status_Accommodation { get; set; }
+        public int? Discount { get; set; }
 
         [default: DateTime.now]
         public DateTime created_at { get; }
@@ -35,7 +41,7 @@ namespace KarnelTravelAPI.Model
 
 
         public virtual ICollection<AccommodationImageModel> AccommodationImages { get; set; }
-        public virtual ICollection<MultiAccommodationModel> MultiAccommodations { get; set; }
+        public virtual ICollection<AccommodationTourModel> AccommodationTours { get; set; }
         //public virtual ICollection<BookSingleServiceModel> BookSingleServices { get; set; }
 
 

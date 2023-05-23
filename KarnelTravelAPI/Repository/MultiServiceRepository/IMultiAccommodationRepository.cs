@@ -5,9 +5,9 @@ namespace KarnelTravelAPI.Repository.MultiServiceRepository
 {
     public interface IMultiAccommodationRepository
     {
-        Task<IEnumerable<MultiAccommodationModel>> GetMultiAccommodationById(string Accommodation_id);
-        Task<MultiAccommodationModel> AddMultiAccommodation(MultiAccommodationModel Accommodation);
-        Task<MultiAccommodationModel> DeleteMultiAccommodation(MultiAccommodationModel Accommodation);
+        Task<IEnumerable<AccommodationTourModel>> GetMultiAccommodationById(string Accommodation_id);
+        Task<AccommodationTourModel> AddMultiAccommodation(AccommodationTourModel Accommodation);
+        Task<AccommodationTourModel> DeleteMultiAccommodation(AccommodationTourModel Accommodation);
 
     }
 }
