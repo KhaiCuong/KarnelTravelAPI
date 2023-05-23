@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KarnelTravelAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230522135952_KarnelTravel")]
+    [Migration("20230523140511_KarnelTravel")]
     partial class KarnelTravel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -499,6 +499,10 @@ namespace KarnelTravelAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Status_User")
                         .HasColumnType("bit");
 
@@ -509,9 +513,6 @@ namespace KarnelTravelAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<bool>("isAdmin")
-                        .HasColumnType("bit");
 
                     b.HasKey("User_id");
 

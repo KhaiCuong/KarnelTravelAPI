@@ -16,7 +16,7 @@ namespace KarnelTravelAPI.Model
         public string Phone_number { get; set; }
         public string? Address { get; set; }
         [Required]
-        public bool isAdmin { get; set; }
+        public string Role { get; set; }
         [Required]
         [DefaultValue("Silver")]
         public decimal Total_payment { get; set; }

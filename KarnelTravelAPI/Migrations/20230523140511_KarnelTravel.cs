@@ -51,7 +51,7 @@ namespace KarnelTravelAPI.Migrations
                     User_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Phone_number = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    isAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Total_payment = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Charge_card = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status_User = table.Column<bool>(type: "bit", nullable: false),
