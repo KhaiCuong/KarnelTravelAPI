@@ -1,4 +1,6 @@
 using KarnelTravelAPI.Model;
+using KarnelTravelAPI.Repository;
+using KarnelTravelAPI.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,8 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
    .GetConnectionString("ConnectDB"));
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
+
+builder.Services.AddScoped<IRestaurantRepository, RestaurantServiceImp>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

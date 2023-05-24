@@ -6,7 +6,7 @@ namespace KarnelTravelAPI.Repository
     {
         Task<IEnumerable<RestaurantModel>> GetRestaurants();
         Task<RestaurantModel> GetRestaurantById(string Restaurant_id);
-        Task<RestaurantModel> AddRestaurant(RestaurantModel Restaurant);
+        Task<RestaurantModel> AddRestaurant(RestaurantModel Restaurant, ICollection<IFormFile> files);
         Task<RestaurantModel> UpdateRestaurant(RestaurantModel Restaurant);
         Task<bool> DeleteRestaurant(string Restaurant_id);
     }

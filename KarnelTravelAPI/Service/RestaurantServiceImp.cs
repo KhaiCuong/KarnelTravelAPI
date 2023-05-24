@@ -1,4 +1,5 @@
 ﻿using KarnelTravelAPI.Model;
+using KarnelTravelAPI.Model.ImageModel;
 using KarnelTravelAPI.Repository;
 using KarnelTravelAPI.Repository.ImageRepository;
 using Microsoft.EntityFrameworkCore;
@@ -7,27 +8,46 @@ namespace KarnelTravelAPI.Service
 {
     public class RestaurantServiceImp : IRestaurantRepository
     {
-        private readonly string _uploadFolder;
-        private DatabaseContext context;
+        /*private  string _uploadFolder;*/
+        private readonly DatabaseContext context;
         public RestaurantServiceImp(DatabaseContext context)
         {
             this.context = context;
         }
 
-        public async Task<RestaurantModel> AddRestaurant(RestaurantModel Restaurant)
+        public async Task<RestaurantModel> AddRestaurant(RestaurantModel Restaurant, ICollection<IFormFile> files)
         {
-            var res = context.Restaurants.FirstOrDefault(p => p.Restaurant_name.Equals(Restaurant.Restaurant_name));
-            if (res == null)
+            if (Restaurant != null)
             {
                 await context.Restaurants.AddAsync(Restaurant);
                 await context.SaveChangesAsync();
-                return Restaurant;
+                if (files.Count > 0)
+                {
+                    foreach (var file in files)
+                    {
+                        if (file.Length > 0)
+                        {
+                            var fileName = Path.GetRandomFileName() + Path.GetFileName(file.FileName);
+                            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+                            using (var fileStream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                            }
+                            var image = new RestaurantImageModel
+                            {
+                                photo_url = "/images/" + fileName,
+                                Restaurant_id = Restaurant.Restaurant_id,
+                            };
+                            context.RestaurantImages.Add(image);
+                        }
+                        
+                    }
+                }
             }
-            else
-            {
-                return null;
-            }
+            return Restaurant;
         }
+
+       
 
         public async Task<bool> DeleteRestaurant(string Restaurant_id)
         {
@@ -79,7 +99,7 @@ namespace KarnelTravelAPI.Service
             }
         }
 
-        public RestaurantServiceImp(IWebHostEnvironment webHostEnvironment)
+        /*public RestaurantServiceImp(IWebHostEnvironment webHostEnvironment)
         {
             _uploadFolder = Path.Combine(webHostEnvironment.ContentRootPath, "uploads");//muốn đưa vào folder nào thì ghi tên folder đó
             if (!Directory.Exists(_uploadFolder))
@@ -97,7 +117,7 @@ namespace KarnelTravelAPI.Service
                 await file.CopyToAsync(stream);
             }
             return fileName;
-        }
+        }*/
 
     }
 }

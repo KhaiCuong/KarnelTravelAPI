@@ -18,18 +18,18 @@ namespace KarnelTravelAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<RestaurantModel>> GetRestaurants()
         {
-            var res = await RestaurantRepository.GetRestaurants();
-            return res;
+            return await RestaurantRepository.GetRestaurants();
+            
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("{Restaurant_id}")]
         public async Task<RestaurantModel> GetRestaurantById(string Restaurant_id)
         {
-            var res = await RestaurantRepository.GetRestaurantById(Restaurant_id);
-            return res;
+            return await RestaurantRepository.GetRestaurantById(Restaurant_id);
+            
         }
         
-        [HttpDelete("{id}")]
+        [HttpDelete("{Restaurant_id}")]
         public async Task<bool> DeleteRestaurant(string Restaurant_id)
         {
             return await RestaurantRepository.DeleteRestaurant(Restaurant_id);
@@ -41,7 +41,7 @@ namespace KarnelTravelAPI.Controllers
             return await RestaurantRepository.AddRestaurant(Restaurant);
         }
         
-        [HttpPut("{id}")]
+        [HttpPut("{Restaurant_id}")]
         public async Task<RestaurantModel> UpdateRestaurant(RestaurantModel Restaurant)
         {
             return await RestaurantRepository.UpdateRestaurant(Restaurant);
