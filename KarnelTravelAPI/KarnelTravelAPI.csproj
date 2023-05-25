@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="uploads\" />
     <Folder Include="Service\" />
+    <Folder Include="uploads\TouristSpots\" />
   </ItemGroup>
 
 </Project>

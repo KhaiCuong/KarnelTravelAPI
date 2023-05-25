@@ -25,12 +25,12 @@ namespace KarnelTravelAPI.Model
         public DateTime update_at { get; }
 
 
-        public virtual ICollection<TransportModel> Transports { get; set; }
-        public virtual ICollection<AccommodationModel> Accommodations { get; set; }
-        public virtual ICollection<TouristSpotModel> TouristSpots { get; set; }
-        public virtual ICollection<RestaurantModel> Restaurants { get; set; }
+        public virtual ICollection<TransportModel>? Transports { get; set; }
+        public virtual ICollection<AccommodationModel>? Accommodations { get; set; }
+        public virtual ICollection<TouristSpotModel>? TouristSpots { get; set; }
+        public virtual ICollection<RestaurantModel>? Restaurants { get; set; }
 
-        public virtual ICollection<LocationImageModel> LocationImages { get; set; }
+        public virtual ICollection<LocationImageModel>? LocationImages { get; set; }
 
 
 

@@ -1,6 +1,8 @@
 using KarnelTravelAPI.Model;
 using KarnelTravelAPI.Repository;
+using KarnelTravelAPI.Repository.ImageRepository;
 using KarnelTravelAPI.Service;
+using KarnelTravelAPI.Service.ImageService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
@@ -29,6 +31,8 @@ builder.Services.AddCors(options =>
             policy.AllowAnyMethod();
         });
 });
+builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
+builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
