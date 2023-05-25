@@ -78,7 +78,7 @@ namespace KarnelTravelAPI.Controllers
         {
             try
             {
-                var resource = await _accommodationService.AddAccommodation(accommodation, image);
+                var resource = await _accommodationService.AddAccommodation(accommodation);
                 if(resource != null)
                 {
                     var response = new CustomResult<AccommodationModel>(200, "Resource Created", accommodation, null);
@@ -109,7 +109,7 @@ namespace KarnelTravelAPI.Controllers
                 var resource = await _accommodationService.GetAccommodationById(accommodation.Accommodation_id);
                 if(resource != null)
                 {
-                    var resourceUpdate = await _accommodationService.UpdateAccommodation(accommodation, image);
+                    var resourceUpdate = await _accommodationService.UpdateAccommodation(accommodation);
                     var response = new CustomResult<AccommodationModel>(200, "Update Accommodation Successfully", resourceUpdate, null);
                     return Ok(response);
                 }
