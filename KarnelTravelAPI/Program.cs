@@ -21,6 +21,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 builder.Services.AddScoped<IAccommodationRepository, AccommodationRepositoryImp>();
+builder.Services.AddScoped<IAccommodationImageRepository, AccommodationImageServiceImp>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
