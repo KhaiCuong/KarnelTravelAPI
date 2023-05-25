@@ -35,15 +35,15 @@ namespace KarnelTravelAPI.Model
 
 
 
-        public virtual ICollection<AccommodationTourModel> AccommodationTours { get; set; }
+        public virtual ICollection<AccommodationTourModel>? AccommodationTours { get; set; }
 
-        public virtual ICollection<TouristSpotTourModel> TouristSpotTours { get; set; }
+        public virtual ICollection<TouristSpotTourModel>? TouristSpotTours { get; set; }
 
-        public virtual ICollection<RestaurantTourModel> RestaurantTours { get; set; }
+        public virtual ICollection<RestaurantTourModel>? RestaurantTours { get; set; }
 
-        public virtual ICollection<TransportTourModel> TransportTours { get; set; }
+        public virtual ICollection<TransportTourModel>? TransportTours { get; set; }
 
-        public virtual ICollection<BookingModel> Bookings { get; set; }
+        public virtual ICollection<BookingModel>? Bookings { get; set; }
 
     }
 }
