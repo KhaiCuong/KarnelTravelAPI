@@ -40,8 +40,8 @@ namespace KarnelTravelAPI.Model
         public virtual LocationModel Location { get; set; }
 
 
-        public virtual ICollection<AccommodationImageModel> AccommodationImages { get; set; }
-        public virtual ICollection<AccommodationTourModel> AccommodationTours { get; set; }
+        public virtual ICollection<AccommodationImageModel>? AccommodationImages { get; set; }
+        public virtual ICollection<AccommodationTourModel>? AccommodationTours { get; set; }
         //public virtual ICollection<BookSingleServiceModel> BookSingleServices { get; set; }
 
 
