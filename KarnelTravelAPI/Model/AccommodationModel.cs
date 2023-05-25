@@ -37,15 +37,15 @@ namespace KarnelTravelAPI.Model
 
         // foreign key 
         public string Location_id { get; set; }
-        public virtual LocationModel Location { get; set; }
+        public virtual LocationModel? Location { get; set; }
 
 
-        public virtual ICollection<AccommodationImageModel> AccommodationImages { get; set; }
-        public virtual ICollection<AccommodationTourModel> AccommodationTours { get; set; }
+        public virtual ICollection<AccommodationImageModel>? AccommodationImages { get; set; }
+        public virtual ICollection<AccommodationTourModel>? AccommodationTours { get; set; }
         //public virtual ICollection<BookSingleServiceModel> BookSingleServices { get; set; }
 
 
-        public virtual ICollection<BookingModel> Bookings { get; set; }
+        public virtual ICollection<BookingModel>? Bookings { get; set; }
 
 
 

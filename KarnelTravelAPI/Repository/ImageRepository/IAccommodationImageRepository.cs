@@ -1,8 +1,10 @@
-﻿namespace KarnelTravelAPI.Repository.ImageRepository
+﻿using KarnelTravelAPI.Model;
+
+namespace KarnelTravelAPI.Repository.ImageRepository
 {
     public interface IAccommodationImageRepository
     {
-        Task<string> UploadFile(IFormFile file);
+        Task<AccommodationModel> UploadFile(List<IFormFile> files);
 
     }
 }

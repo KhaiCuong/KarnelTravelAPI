@@ -15,7 +15,7 @@ namespace KarnelTravelAPI.Model.ImageModel
 
         // foreign key 
         public string Location_id { get; set; }
-        public virtual LocationModel Location { get; set; }
+        public virtual LocationModel? Location { get; set; }
 
     }
 }
