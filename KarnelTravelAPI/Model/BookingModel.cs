@@ -25,7 +25,7 @@ namespace KarnelTravelAPI.Model
 
 
         public int User_id { get; set; }
-        public virtual UserModel User { get; set; }
+        public virtual UserModel? User { get; set; }
         public int? Tour_id { get; set; }
         public virtual TourModel? Tour { get; set; }
         public string? Accommodation_id { get; set; }
@@ -37,8 +37,8 @@ namespace KarnelTravelAPI.Model
         public string? Transport_id { get; set; }
         public virtual TransportModel? Transport { get; set; }
 
-        public virtual ICollection<FeedbackModel> Feedbacks { get; set; }
-        public virtual ICollection<PaymentModel> Payments { get; set; }
+        public virtual ICollection<FeedbackModel>? Feedbacks { get; set; }
+        public virtual ICollection<PaymentModel>? Payments { get; set; }
 
 
     }

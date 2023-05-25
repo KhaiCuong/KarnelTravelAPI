@@ -15,6 +15,6 @@ namespace KarnelTravelAPI.Model.ImageModel
 
         // foreign key 
         public string Restaurant_id { get; set; }
-        public virtual RestaurantModel Restaurant { get; set; }
+        public virtual RestaurantModel? Restaurant { get; set; }
     }
 }

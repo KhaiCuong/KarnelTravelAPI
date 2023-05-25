@@ -43,8 +43,8 @@ namespace KarnelTravelAPI.Model
 
 
 
-        public virtual ICollection<BookingModel> Bookings { get; set; }
-        public virtual ICollection<PaymentModel> Payments { get; set; }
+        public virtual ICollection<BookingModel>? Bookings { get; set; }
+        public virtual ICollection<PaymentModel>? Payments { get; set; }
 
         //public virtual ICollection<BookSingleServiceModel> BookSingleServices { get; set; }
 
