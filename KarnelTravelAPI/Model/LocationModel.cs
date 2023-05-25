@@ -12,7 +12,7 @@ namespace KarnelTravelAPI.Model
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Location_id { get; set; }
         [Required]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be 3-20 characters")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be 3-30 characters")]
         public string Location_name { get; set; }
         public string? Description { get; set; }
 
@@ -25,12 +25,11 @@ namespace KarnelTravelAPI.Model
         public DateTime update_at { get; }
 
 
-        public virtual ICollection<TransportModel> Transports { get; set; }
-        public virtual ICollection<AccommodationModel> Accommodations { get; set; }
-        public virtual ICollection<TouristSpotModel> TouristSpots { get; set; }
-        public virtual ICollection<RestaurantModel> Restaurants { get; set; }
-
-        public virtual ICollection<LocationImageModel> LocationImages { get; set; }
+        public virtual ICollection<TransportModel>? Transports { get; set; }
+        public virtual ICollection<AccommodationModel>? Accommodations { get; set; }
+        public virtual ICollection<TouristSpotModel>? TouristSpots { get; set; }
+        public virtual ICollection<RestaurantModel>? Restaurants { get; set; }
+        public virtual ICollection<LocationImageModel>? LocationImages { get; set; }
 
 
 

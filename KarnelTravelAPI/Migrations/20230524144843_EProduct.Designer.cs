@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KarnelTravelAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230523140511_KarnelTravel")]
-    partial class KarnelTravel
+    [Migration("20230524144843_EProduct")]
+    partial class EProduct
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
