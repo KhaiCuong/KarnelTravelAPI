@@ -44,7 +44,7 @@ namespace KarnelTravelAPI.Controllers
 
         }
         
-        [HttpGet("{Restaurant_id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<CustomResult<RestaurantModel>>> GetRestaurantById(string id)
         {
             try
@@ -76,7 +76,7 @@ namespace KarnelTravelAPI.Controllers
 
         }
         
-        [HttpDelete("{Restaurant_id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<CustomResult<string>>> DeleteRestaurant(string id)
         {
             bool resourceDeleted = false;
