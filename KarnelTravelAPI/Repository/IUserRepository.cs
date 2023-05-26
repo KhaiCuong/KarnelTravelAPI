@@ -8,7 +8,7 @@ namespace KarnelTravelAPI.Repository
         Task<UserModel> GetUserByIdAsync(int User_id);
         Task<UserModel> AddUserAsync(UserModel User);
         Task<UserModel> UpdateUserAsync(UserModel User);
-        Task<UserModel> Login(string Email,string Password);
+        Task<UserModel> Login(UserModel userLogin);
 
         Task<bool> DeleteUserAsync(int User_id);
     }

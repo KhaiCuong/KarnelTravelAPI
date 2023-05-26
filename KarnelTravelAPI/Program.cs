@@ -3,8 +3,12 @@ using KarnelTravelAPI.Repository;
 using KarnelTravelAPI.Repository.ImageRepository;
 using KarnelTravelAPI.Service;
 using KarnelTravelAPI.Service.ImageService;
+using KarnelTravelAPI.Serviece;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +26,22 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
 builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
+builder.Services.AddScoped<ITransportRepository, TransportServiceImp>();
+builder.Services.AddScoped<IUserRepository, UserRepositoryImp>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
@@ -32,8 +52,11 @@ builder.Services.AddCors(options =>
             policy.AllowAnyMethod();
         });
 });
-
 var app = builder.Build();
+
+
+
+
 app.UseCors();
 
 // Configure the HTTP request pipeline.
@@ -42,12 +65,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-           Path.Combine(builder.Environment.ContentRootPath, "uploads")),
-    RequestPath = "/uploads"
-});
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//           Path.Combine(builder.Environment.ContentRootPath, "uploads")),
+//    RequestPath = "/uploads"
+//});
 
 app.UseAuthorization();
 

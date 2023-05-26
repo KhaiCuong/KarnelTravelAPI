@@ -6,7 +6,8 @@ namespace KarnelTravelAPI.Serviece
 {
     public class UserRepositoryImp : IUserRepository
     {
-        private DatabaseContext _dbContext;
+        private readonly DatabaseContext _dbContext;
+        private readonly IUserRepository _userRepository;
         public UserRepositoryImp(DatabaseContext dbContext)
         {
             _dbContext = dbContext;
@@ -14,7 +15,7 @@ namespace KarnelTravelAPI.Serviece
 
         public async Task<UserModel> AddUserAsync(UserModel User)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.User_name.Equals(User.User_name));
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.User_name.Equals(User.User_id));
             if (user == null)
             {
                 await _dbContext.Users.AddAsync(User);
@@ -30,7 +31,7 @@ namespace KarnelTravelAPI.Serviece
         public async Task<bool> DeleteUserAsync(int User_id)
         {
             UserModel user = await _dbContext.Users.FindAsync(User_id);
-            if (user == null)
+            if (user != null)
             {
                 _dbContext.Users.Remove(user);
                 _dbContext.SaveChanges();
@@ -61,23 +62,20 @@ namespace KarnelTravelAPI.Serviece
 
         }
 
-        public Task<UserModel> Login(string Email, string Password)
+        public Task<UserModel> Login(UserModel userLogin)
         {
             throw new NotImplementedException();
         }
 
         public async Task<UserModel> UpdateUserAsync(UserModel User)
         {
-            var user = await _dbContext.Users.FindAsync(User.User_id);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.User_id.Equals(User.User_id));
             if (user != null) 
             
             {
-                user.User_name = user.User_name;
-                user.Address = user.Address;
-                user.Phone_number = user.Phone_number;
-                user.Email = user.Email;
+             _dbContext.Entry(User).State = EntityState.Modified;
                 await _dbContext.SaveChangesAsync();
-                return user;
+                return User;
                 
             }
             else
