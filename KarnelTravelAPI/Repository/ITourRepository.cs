@@ -8,7 +8,7 @@ namespace KarnelTravelAPI.Repository
         Task<TourModel> GetTourById(int Tour_id);
         Task<TourModel> AddTour(TourModel Tour);
         Task<TourModel> UpdateTour(TourModel Tour);
-        Task<TourModel> UpdateQuantityById(int Tour_id);
+        Task<TourModel> UpdateStatus_tour(int Tour_id);
         Task<bool> DeleteTour(int Tour_id);
     }
 }

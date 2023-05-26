@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KarnelTravelAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TouristSpotController : ControllerBase
     {

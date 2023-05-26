@@ -75,7 +75,7 @@ namespace KarnelTravelAPI.Service.ImageService
 
                             var image = new TouristSpotImageModel
                             {
-                                photo_url = "/uploads/TouristSpots/" + fileName,
+                                photo_url = "http://localhost:5158/uploads/TouristSpots/" + fileName,
                                 TouristSpot_id = TouristSpot_Id,
                             };
 
@@ -184,7 +184,7 @@ namespace KarnelTravelAPI.Service.ImageService
 
                             var image = new TouristSpotImageModel
                             {
-                                photo_url = "/uploads/TouristSpots/" + fileName,
+                                photo_url = "http://localhost:5158/uploads/TouristSpots/" + fileName,
                                 TouristSpot_id = TouristSpot_Id,
                             };
 
