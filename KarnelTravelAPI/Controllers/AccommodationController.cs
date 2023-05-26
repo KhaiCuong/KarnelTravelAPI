@@ -45,7 +45,7 @@ namespace KarnelTravelAPI.Controllers
             }
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<CustomResult<AccommodationModel>>> GetAccommodation(string id)
         {
             try
@@ -74,7 +74,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomResult<AccommodationModel>>> AddAccommodation([FromForm] AccommodationModel accommodation, ICollection<IFormFile>? image)
+        public async Task<ActionResult<CustomResult<AccommodationModel>>> AddAccommodation( AccommodationModel accommodation)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<CustomResult<AccommodationModel>>> UpdateAccommodation([FromForm] AccommodationModel accommodation, ICollection<IFormFile> image)
+        public async Task<ActionResult<CustomResult<AccommodationModel>>> UpdateAccommodation(AccommodationModel accommodation)
         {
             try
             {
