@@ -26,6 +26,9 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
 builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
+builder.Services.AddScoped<IAccommodationRepository, AccommodationRepositoryImp>();
+builder.Services.AddScoped<IAccommodationImageRepository, AccommodationImageServiceImp>();
+
 builder.Services.AddScoped<ITransportRepository, TransportServiceImp>();
 builder.Services.AddScoped<IUserRepository, UserRepositoryImp>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -52,11 +55,8 @@ builder.Services.AddCors(options =>
             policy.AllowAnyMethod();
         });
 });
+
 var app = builder.Build();
-
-
-
-
 app.UseCors();
 
 // Configure the HTTP request pipeline.
@@ -65,12 +65,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//    FileProvider = new PhysicalFileProvider(
-//           Path.Combine(builder.Environment.ContentRootPath, "uploads")),
-//    RequestPath = "/uploads"
-//});
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "uploads")),
+    RequestPath = "/uploads"
+});
 
 app.UseAuthorization();
 

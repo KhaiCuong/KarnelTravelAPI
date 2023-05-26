@@ -16,7 +16,7 @@ namespace KarnelTravelAPI.Model
         public string? Activities { get; set; }
         public string? Description { get; set; }
         [DataType(DataType.Currency)]
-        [Range(1, 100000000000, ErrorMessage = "Quantity must be greater than 1")]
+        [Range(1, 100000000000, ErrorMessage = "Price must be greater than 1")]
         public decimal Price { get; set; }
         [Required]
         public bool Status_TouristSpot { get; set; }
