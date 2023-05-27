@@ -62,7 +62,7 @@ namespace KarnelTravelAPI.Serviece
 
         }
 
-        public Task<UserModel> Login(string email, string password)
+        public Task<UserModel> Login(UserModel userLogin)
         {
             throw new NotImplementedException();
         }

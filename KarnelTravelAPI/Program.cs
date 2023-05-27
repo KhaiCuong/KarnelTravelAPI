@@ -18,6 +18,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseSqlServer(builder.Configuration
@@ -26,20 +27,13 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
 builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
+builder.Services.AddScoped<IAccommodationRepository, AccommodationRepositoryImp>();
+builder.Services.AddScoped<IAccommodationImageRepository, AccommodationImageServiceImp>();
+builder.Services.AddScoped<ITransportRepository, TransportServiceImp>();
 builder.Services.AddScoped<IUserRepository, UserRepositoryImp>();
 builder.Services.AddScoped<IRestaurantRepository, RestaurantServiceImp>();
 builder.Services.AddScoped<IRestaurantImageRepository, ResImgServiceImp>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(
-        policy =>
-        {
-            policy.AllowAnyOrigin();
-            policy.AllowAnyHeader();
-            policy.AllowAnyMethod();
-        });
-});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
@@ -54,10 +48,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin();
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+        });
+});
+
+
+
 
 var app = builder.Build();
 app.UseCors();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

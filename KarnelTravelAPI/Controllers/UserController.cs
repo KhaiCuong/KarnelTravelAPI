@@ -22,6 +22,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpGet]
+        //[Route("Admins")]
         [Authorize(Roles = $"{RoleModels.Admin}")]
         public async Task<ActionResult<CustomResult<IEnumerable<UserModel>>>> GetUsersAsync()
         {
@@ -56,12 +57,12 @@ namespace KarnelTravelAPI.Controllers
 
 
         [HttpGet("{id}")]
-        [Authorize(Roles = $"{RoleModels.Admin}")]
-        public async Task<ActionResult<CustomResult<UserModel>>> GetUser(int User_id)
+        //[Authorize(Roles = $"{RoleModels.Admin}")]
+        public async Task<ActionResult<CustomResult<UserModel>>> GetUser(int id)
         {
             try
             {
-                var resource = await _userRepository.GetUserByIdAsync(User_id);
+                var resource = await _userRepository.GetUserByIdAsync(id);
                 if (resource == null)
                 {
                     var response = new CustomResult<UserModel>(404,
@@ -91,7 +92,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = $"{RoleModels.Admin}")]
+        //[Authorize(Roles = $"{RoleModels.Admin}")]
         public async Task<ActionResult<UserModel>> addUser(UserModel userModel)
         {
             try
@@ -126,6 +127,7 @@ namespace KarnelTravelAPI.Controllers
 
         [HttpPut("{id}")]
         public async Task<ActionResult<CustomResult<UserModel>>> UpdateUserAsync(UserModel User)
+
         {
             try
             {
@@ -156,7 +158,7 @@ namespace KarnelTravelAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = $"{RoleModels.Admin}")]
+        //[Authorize(Roles = $"{RoleModels.Admin}")]
         public async Task<ActionResult<CustomResult<string>>> DeleteUserAsync(int id)
         {
             bool resourceDeleted = false;

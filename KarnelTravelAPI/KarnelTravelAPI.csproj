@@ -1,10 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
+    <Compile Remove="uploads\**" />
+    <Content Remove="uploads\**" />
+    <EmbeddedResource Remove="uploads\**" />
+    <None Remove="uploads\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
@@ -19,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="uploads\Restaurant\" />
+    <Folder Include="uploads\Accommodations\" />
     <Folder Include="uploads\TouristSpots\" />
   </ItemGroup>
 
