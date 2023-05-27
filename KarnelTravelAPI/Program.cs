@@ -18,6 +18,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseSqlServer(builder.Configuration
@@ -28,9 +29,11 @@ builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
 builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
 builder.Services.AddScoped<IAccommodationRepository, AccommodationRepositoryImp>();
 builder.Services.AddScoped<IAccommodationImageRepository, AccommodationImageServiceImp>();
-
 builder.Services.AddScoped<ITransportRepository, TransportServiceImp>();
 builder.Services.AddScoped<IUserRepository, UserRepositoryImp>();
+builder.Services.AddScoped<IRestaurantRepository, RestaurantServiceImp>();
+builder.Services.AddScoped<IRestaurantImageRepository, ResImgServiceImp>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
@@ -56,9 +59,11 @@ builder.Services.AddCors(options =>
         });
 });
 
+
+
+
 var app = builder.Build();
 app.UseCors();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -71,6 +76,7 @@ app.UseStaticFiles(new StaticFileOptions
            Path.Combine(builder.Environment.ContentRootPath, "uploads")),
     RequestPath = "/uploads"
 });
+app.UseAuthentication();
 
 app.UseAuthorization();
 

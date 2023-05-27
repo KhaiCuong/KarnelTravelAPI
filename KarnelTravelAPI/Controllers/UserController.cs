@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Data;
 
 namespace KarnelTravelAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -21,7 +22,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Admins")]
+        //[Route("Admins")]
         [Authorize(Roles = $"{RoleModels.Admin}")]
         public async Task<ActionResult<CustomResult<IEnumerable<UserModel>>>> GetUsersAsync()
         {
@@ -56,12 +57,12 @@ namespace KarnelTravelAPI.Controllers
 
 
         [HttpGet("{id}")]
-        [Authorize(Roles = $"{RoleModels.Admin}")]
-        public async Task<ActionResult<CustomResult<UserModel>>> GetUser(int User_id)
+        //[Authorize(Roles = $"{RoleModels.Admin}")]
+        public async Task<ActionResult<CustomResult<UserModel>>> GetUser(int id)
         {
             try
             {
-                var resource = await _userRepository.GetUserByIdAsync(User_id);
+                var resource = await _userRepository.GetUserByIdAsync(id);
                 if (resource == null)
                 {
                     var response = new CustomResult<UserModel>(404,
@@ -91,8 +92,8 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<UserModel>> AddUserAsync(UserModel userModel)
+        //[Authorize(Roles = $"{RoleModels.Admin}")]
+        public async Task<ActionResult<UserModel>> addUser(UserModel userModel)
         {
             try
             {
@@ -157,6 +158,7 @@ namespace KarnelTravelAPI.Controllers
 
 
         [HttpDelete("{id}")]
+        //[Authorize(Roles = $"{RoleModels.Admin}")]
         public async Task<ActionResult<CustomResult<string>>> DeleteUserAsync(int id)
         {
             bool resourceDeleted = false;
@@ -175,7 +177,7 @@ namespace KarnelTravelAPI.Controllers
             }
             else
             {
-                var response = new CustomResult<string>(200,
+                var response = new CustomResult<string>(404,
                     "Resource not found or unable to delete", null, null);
                 return NotFound(response);
             }

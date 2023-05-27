@@ -168,7 +168,7 @@ namespace KarnelTravelAPI.Service.ImageService
 
                             var image = new AccommodationImageModel
                             {
-                                photo_url = "/uploads/Accommodation/" + fileName,
+                                photo_url = "/uploads/Accommodations/" + fileName,
                                 Accommodation_id = Accommodation_Id,
                             };
 

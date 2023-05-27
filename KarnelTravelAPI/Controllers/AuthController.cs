@@ -7,10 +7,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using TOKENDEMO.Models;
 
 namespace KarnelTravelAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -24,24 +25,32 @@ namespace KarnelTravelAPI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-
-        public ActionResult Login(UserModel userLogin)
+        public ActionResult Login(UserLogin userLogin)
         {
             var user = Authenticate(userLogin);
+
             if (user != null)
             {
                 var token = GenerateToken(user);
-                return Ok(new { token });
+                var userToken = new UserModel
+                {
+                    Email = user.Email,
+                    User_name = user.User_name,
+                    Role = user.Role
+
+                };
+                return Ok(new { token, userToken });
             }
-            return NotFound("User not found");
+
+            return NotFound("user not found");
         }
 
-        private UserModel Authenticate(UserModel user) 
+        private UserModel Authenticate(UserLogin userLogin) 
         {
             var listUser = _databaseContext.Users.ToList();
             if (listUser != null && listUser.Count > 0)
             {
-                var currentUser = listUser.FirstOrDefault(u => u.Email.ToLower() == user.Email && u.Password == user.Password);
+                var currentUser = listUser.FirstOrDefault(u => u.Email.ToLower() == userLogin.Email && u.Password == userLogin.Password);
                 return currentUser;
             }
             return null;
