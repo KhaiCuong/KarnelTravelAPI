@@ -18,7 +18,6 @@ namespace KarnelTravelAPI.Model
         [Required]
         public string Role { get; set; }
         [Required]
-        [DefaultValue("Silver")]
         public decimal Total_payment { get; set; }
         public string? Charge_card { get; set; }
 

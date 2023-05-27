@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KarnelTravelAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TouristSpotController : ControllerBase
     {
@@ -85,7 +85,7 @@ namespace KarnelTravelAPI.Controllers
 
         [HttpPost]
         public async Task<ActionResult<CustomResult<TouristSpotModel>>> AddTouristSpot
-          ([FromForm] TouristSpotModel touristSpot)
+          (TouristSpotModel touristSpot)
         {
                   try
                 {
@@ -118,7 +118,7 @@ namespace KarnelTravelAPI.Controllers
         }
         [HttpPut("{id}")]
         public async Task<ActionResult<CustomResult<TouristSpotModel>>> UpdateTouristSpot
-         ([FromForm]  TouristSpotModel touristSpot)
+         ( TouristSpotModel touristSpot)
         {
             try
             {
