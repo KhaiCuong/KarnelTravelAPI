@@ -12,7 +12,7 @@ namespace KarnelTravelAPI.Model
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Location_id { get; set; }
         [Required]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be 3-20 characters")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be 3-30 characters")]
         public string Location_name { get; set; }
         public string? Description { get; set; }
 

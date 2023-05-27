@@ -1,4 +1,6 @@
-﻿namespace KarnelTravelAPI.CustomStatusCode
+﻿using Microsoft.AspNetCore.Http;
+
+namespace KarnelTravelAPI.CustomStatusCode
 {
     public class CustomResult<T>
     {

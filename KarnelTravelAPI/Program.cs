@@ -27,6 +27,12 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
 builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
+
+builder.Services.AddScoped<ILocationImageRepository, LocationImageServiceImp>();
+builder.Services.AddScoped<ILocationRepository, LocationRepositoryImp>();
+
+
+
 builder.Services.AddScoped<IAccommodationRepository, AccommodationRepositoryImp>();
 builder.Services.AddScoped<IAccommodationImageRepository, AccommodationImageServiceImp>();
 builder.Services.AddScoped<ITransportRepository, TransportServiceImp>();
@@ -51,6 +57,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
@@ -67,6 +74,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 app.UseCors();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

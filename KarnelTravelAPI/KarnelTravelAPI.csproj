@@ -26,8 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+
+    <Folder Include="uploads\Locations\" />
+
     <Folder Include="uploads\Restaurant\" />
     <Folder Include="uploads\Accommodations\" />
+
     <Folder Include="uploads\TouristSpots\" />
   </ItemGroup>
 
