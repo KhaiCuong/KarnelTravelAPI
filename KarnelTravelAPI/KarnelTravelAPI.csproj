@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="uploads\Restaurant\" />
     <Folder Include="uploads\TouristSpots\" />
   </ItemGroup>
 

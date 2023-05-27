@@ -27,6 +27,9 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
 builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
 builder.Services.AddScoped<IUserRepository, UserRepositoryImp>();
+builder.Services.AddScoped<IRestaurantRepository, RestaurantServiceImp>();
+builder.Services.AddScoped<IRestaurantImageRepository, ResImgServiceImp>();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(

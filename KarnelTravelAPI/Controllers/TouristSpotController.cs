@@ -85,7 +85,7 @@ namespace KarnelTravelAPI.Controllers
 
         [HttpPost]
         public async Task<ActionResult<CustomResult<TouristSpotModel>>> AddTouristSpot
-          ([FromForm] TouristSpotModel touristSpot)
+          (TouristSpotModel touristSpot)
         {
                   try
                 {
@@ -118,7 +118,7 @@ namespace KarnelTravelAPI.Controllers
         }
         [HttpPut("{id}")]
         public async Task<ActionResult<CustomResult<TouristSpotModel>>> UpdateTouristSpot
-         ([FromForm]  TouristSpotModel touristSpot)
+         ( TouristSpotModel touristSpot)
         {
             try
             {

@@ -1,6 +1,5 @@
 ﻿using KarnelTravelAPI.CustomStatusCode;
 using KarnelTravelAPI.Model;
-using KarnelTravelAPI.Repository;
 using KarnelTravelAPI.Repository.ImageRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,15 +8,15 @@ namespace KarnelTravelAPI.Controllers.ImageController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TouristSpotImageController : ControllerBase
+    public class ResImgController : ControllerBase
     {
-        private readonly ITouristSpotImageRepository _repository;
-        public TouristSpotImageController(ITouristSpotImageRepository repository)
+        private readonly IRestaurantImageRepository _repository;
+        public ResImgController(IRestaurantImageRepository repository)
         {
             _repository = repository;
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomResult<IEnumerable<string>>>> GetImagesByTouristSpotId(string id )
+        public async Task<ActionResult<CustomResult<IEnumerable<string>>>> GetImagesByRestaurantId(string id)
         {
             try
             {
@@ -50,26 +49,26 @@ namespace KarnelTravelAPI.Controllers.ImageController
         }
 
 
-        [HttpPut("{id}")] // id = TouristSpot_Id
+        [HttpPut("{id}")] // id = Restaurant_Id
         public async Task<ActionResult<CustomResult<bool>>> UpdateImageById(List<IFormFile> files, string id)
-        {           
+        {
             try
             {
                 var resources = await _repository.UpdateImg(files, id);
                 if (resources)
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(200, "Resource created", null, null);
+                    var response = new CustomResult<IEnumerable<RestaurantModel>>(200, "Resource created", null, null);
                     return Ok(response);
                 }
                 else
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(404, "Not Resources Found", null, null);
+                    var response = new CustomResult<IEnumerable<RestaurantModel>>(404, "Not Resources Found", null, null);
                     return NotFound(response);
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new CustomResult<TouristSpotModel>()
+                return StatusCode(500, new CustomResult<RestaurantModel>()
                 {
                     Message = "An error occurred while retrieving the model.",
                     Error = ex.Message
@@ -79,25 +78,25 @@ namespace KarnelTravelAPI.Controllers.ImageController
 
 
         [HttpPost]
-        public async Task<ActionResult<CustomResult<bool>>> PostImages([FromForm] List<IFormFile> files, string TouristSpot_Id)
+        public async Task<ActionResult<CustomResult<bool>>> PostImages(List<IFormFile> files, string Restaurant_id)
         {
             try
             {
-                var resources = await _repository.AddImage(files, TouristSpot_Id);
+                var resources = await _repository.AddImage(files, Restaurant_id);
                 if (resources)
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(200, "Resource created",null, null);
+                    var response = new CustomResult<IEnumerable<RestaurantModel>>(200, "Resource created", null, null);
                     return Ok(response);
                 }
                 else
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(404, "Not Resources Found", null, null);
+                    var response = new CustomResult<IEnumerable<RestaurantModel>>(404, "Not Resources Found", null, null);
                     return NotFound(response);
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new CustomResult<TouristSpotModel>()
+                return StatusCode(500, new CustomResult<RestaurantModel>()
                 {
                     Message = "An error occurred while retrieving the model.",
                     Error = ex.Message
@@ -128,3 +127,4 @@ namespace KarnelTravelAPI.Controllers.ImageController
         }
     }
 }
+
