@@ -7,7 +7,6 @@ namespace KarnelTravelAPI.Service
     public class TransportServiceImp: ITransportRepository
     {
         private readonly DatabaseContext databaseContext;
-        private readonly ITransportRepository transportRepository;
 
         public TransportServiceImp(DatabaseContext databaseContext) 
         {

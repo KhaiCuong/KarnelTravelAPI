@@ -7,7 +7,6 @@ namespace KarnelTravelAPI.Serviece
     public class UserRepositoryImp : IUserRepository
     {
         private readonly DatabaseContext _dbContext;
-        private readonly IUserRepository _userRepository;
         public UserRepositoryImp(DatabaseContext dbContext)
         {
             _dbContext = dbContext;

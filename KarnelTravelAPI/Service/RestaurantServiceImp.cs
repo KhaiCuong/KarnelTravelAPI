@@ -10,7 +10,6 @@ namespace KarnelTravelAPI.Service
     public class RestaurantServiceImp : IRestaurantRepository
     {
         private readonly DatabaseContext _databaseContext;
-       /* private readonly ITouristSpotImageRepository _touristSpotImage;*/
 
         public RestaurantServiceImp(DatabaseContext databaseContext)
         {
