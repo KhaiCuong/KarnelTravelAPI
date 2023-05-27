@@ -9,7 +9,6 @@ namespace KarnelTravelAPI.Service
     public class AccommodationRepositoryImp : IAccommodationRepository
     {
         private readonly DatabaseContext _dbContext;
-        private readonly IAccommodationImageRepository accommodationImage; 
 
         public AccommodationRepositoryImp(DatabaseContext dbContext)
         {

@@ -10,7 +10,6 @@ namespace KarnelTravelAPI.Service
     public class TouristSpotServiceImp : ITouristSpotRepository
     {
         private readonly DatabaseContext _databaseContext;
-        private readonly ITouristSpotImageRepository _touristSpotImage;
 
         public TouristSpotServiceImp(DatabaseContext databaseContext)
         {
@@ -26,10 +25,10 @@ namespace KarnelTravelAPI.Service
                 return TouristSpot;
 
             } else
-                {
+            {
                     return null;
-                }
-             }
+            }
+        }
 
         public async Task<bool> DeleteTouristSpot(string TouristSpot_id)
         {

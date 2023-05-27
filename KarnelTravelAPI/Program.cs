@@ -33,6 +33,9 @@ builder.Services.AddScoped<ITransportRepository, TransportServiceImp>();
 builder.Services.AddScoped<IUserRepository, UserRepositoryImp>();
 builder.Services.AddScoped<IRestaurantRepository, RestaurantServiceImp>();
 builder.Services.AddScoped<IRestaurantImageRepository, ResImgServiceImp>();
+builder.Services.AddScoped<ITourRepository, TourServiceImp>();
+builder.Services.AddScoped<IPaymentRepository, PaymentServiceImp>();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
