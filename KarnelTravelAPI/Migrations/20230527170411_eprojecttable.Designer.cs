@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KarnelTravelAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230524144843_EProduct")]
-    partial class EProduct
+    [Migration("20230527170411_eprojecttable")]
+    partial class eprojecttable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

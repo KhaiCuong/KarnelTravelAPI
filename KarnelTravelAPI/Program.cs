@@ -1,6 +1,10 @@
 using KarnelTravelAPI.Model;
 using KarnelTravelAPI.Repository;
+using KarnelTravelAPI.Repository.ImageRepository;
+using KarnelTravelAPI.Service;
+using KarnelTravelAPI.Service.ImageService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +20,25 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
    .GetConnectionString("ConnectDB"));
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
+builder.Services.AddScoped<ITouristSpotRepository,TouristSpotServiceImp>();
+builder.Services.AddScoped<ITouristSpotImageRepository, TouristSpotImageServiceImp>();
+builder.Services.AddScoped<ILocationImageRepository, LocationImageServiceImp>();
 builder.Services.AddScoped<ILocationRepository, LocationRepositoryImp>();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin();
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
+app.UseCors();
 
 
 // Configure the HTTP request pipeline.
@@ -27,6 +47,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "uploads")),
+    RequestPath = "/uploads"
+});
 
 app.UseAuthorization();
 

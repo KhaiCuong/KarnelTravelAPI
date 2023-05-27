@@ -3,9 +3,9 @@
     public class AccommodationTourModel
     {
         public int Tour_id { get; set; }
-        public virtual TourModel Tours { get; set; }
+        public virtual TourModel? Tours { get; set; }
         public string Accommodation_id { get; set; }
-        public virtual AccommodationModel Accommodations { get; set; }
+        public virtual AccommodationModel? Accommodations { get; set; }
 
 
 

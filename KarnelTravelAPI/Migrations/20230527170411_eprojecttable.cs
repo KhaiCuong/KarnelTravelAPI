@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KarnelTravelAPI.Migrations
 {
-    public partial class EProduct : Migration
+    public partial class eprojecttable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

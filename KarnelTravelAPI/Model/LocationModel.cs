@@ -29,6 +29,7 @@ namespace KarnelTravelAPI.Model
         public virtual ICollection<AccommodationModel>? Accommodations { get; set; }
         public virtual ICollection<TouristSpotModel>? TouristSpots { get; set; }
         public virtual ICollection<RestaurantModel>? Restaurants { get; set; }
+
         public virtual ICollection<LocationImageModel>? LocationImages { get; set; }
 
 

@@ -6,16 +6,16 @@ namespace KarnelTravelAPI.CustomStatusCode
     {
         public CustomResult()
         {
+            
         }
 
-        public CustomResult(int status, string message, T? data, string? error)
+        public CustomResult(int status, string message, T? data ,string? error)
         {
-            Status = status;
+            Status = status;    
             Message = message;
             Data = data;
             Error = error;
         }
-
         public int Status { get; set; }
         public string Message { get; set; }
         public T? Data { get; set; }

@@ -20,7 +20,7 @@ namespace KarnelTravelAPI.Model
 
         // foreign key 
         public int booking_id { get; set; }
-        public virtual BookingModel Booking { get; set; }
+        public virtual BookingModel? Booking { get; set; }
    
 
     }
