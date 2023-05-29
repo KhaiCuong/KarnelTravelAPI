@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KarnelTravelAPI.Controllers.ImageController
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LocationImageController : ControllerBase
     {
@@ -49,7 +49,7 @@ namespace KarnelTravelAPI.Controllers.ImageController
 
         }
 
-        [HttpPut("{id}")] // id = Location_id
+        [HttpPost("{id}")] // id = Location_idIEnumerable<TouristSpotModel
         public async Task<ActionResult<CustomResult<bool>>> UpdateLocationImageById(List<IFormFile> files, string id)
         {
             try
@@ -57,18 +57,18 @@ namespace KarnelTravelAPI.Controllers.ImageController
                 var resources = await _repository.UpdateLocationImgAsync(files, id);
                 if (resources)
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(200, "Location image updated", null, null);
+                    var response = new CustomResult<bool>(200, "Location image updated", resources, null);
                     return Ok(response);
                 }
                 else
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(404, "No Resources Found", null, null);
+                    var response = new CustomResult<bool>(404, "No Resources Found", resources, null);
                     return NotFound(response);
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new CustomResult<TouristSpotModel>()
+                return StatusCode(500, new CustomResult<IEnumerable<string>>()
                 {
                     Message = "An error occurred while retrieving the model.",
                     Error = ex.Message
@@ -84,18 +84,18 @@ namespace KarnelTravelAPI.Controllers.ImageController
                 var resources = await _repository.AddLocationImageAsync(files, Location_id);
                 if (resources)
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(200, "Location Image created", null, null);
+                    var response = new CustomResult<bool>(200, "Location Image created", resources, null);
                     return Ok(response);
                 }
                 else
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(404, "Not Resources Found", null, null);
+                    var response = new CustomResult<bool>(404, "Not Resources Found", resources, null);
                     return NotFound(response);
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new CustomResult<TouristSpotModel>()
+                return StatusCode(500, new CustomResult<IEnumerable<string>>()
                 {
                     Message = "An error occurred while retrieving the model.",
                     Error = ex.Message
@@ -106,21 +106,19 @@ namespace KarnelTravelAPI.Controllers.ImageController
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CustomResult<string>>> DeleteLocationImage(string id)
+        public async Task<ActionResult<CustomResult<bool>>> DeleteLocationImage(string id)
         {
-            bool resourceDeleted = false;
             var resource = await _repository.DeleteLocationImageAsync(id);
-            if (resource != null)
+            if (resource)
             {
-
-                var response = new CustomResult<string>(200,
-                    "Location Image deleted successfully", null, null);
+                var response = new CustomResult<bool>(200,
+                    "Location Image deleted successfully", true, null);
                 return Ok(response);
             }
             else
             {
-                var response = new CustomResult<string>(200,
-                    "Resource not found or unable to delete", null, null);
+                var response = new CustomResult<bool>(400,
+                    "Resource not found or unable to delete", false, null);
                 return NotFound(response);
             }
 

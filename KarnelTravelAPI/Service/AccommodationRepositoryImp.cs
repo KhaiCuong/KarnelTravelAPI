@@ -78,7 +78,7 @@ namespace KarnelTravelAPI.Service
             {
                 _dbContext.Entry(Accommodation).State = EntityState.Modified;
                 await _dbContext.SaveChangesAsync();
-                return accommodation;
+                return Accommodation;
             }
             else
             {

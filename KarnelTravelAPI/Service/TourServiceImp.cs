@@ -31,7 +31,7 @@ namespace KarnelTravelAPI.Service
             }
         }
 
-        public async Task<bool> DeleteTour(int Tour_id)
+        public async Task<bool> DeleteTour(string Tour_id)
         {
 
             TourModel tour = await _dbContext.Tours.FindAsync(Tour_id);
@@ -49,7 +49,7 @@ namespace KarnelTravelAPI.Service
             }
         }
 
-        public async Task<TourModel> GetTourById(int Tour_id)
+        public async Task<TourModel> GetTourById(string Tour_id)
         {
             TourModel tour = await _dbContext.Tours.FindAsync(Tour_id);
 
@@ -70,7 +70,7 @@ namespace KarnelTravelAPI.Service
             return await _dbContext.Tours.ToListAsync();
         }
 
-        public async Task<TourModel> UpdateStatus_tour(int Tour_id)
+        public async Task<TourModel> UpdateStatus_tour(string Tour_id)
         {
             TourModel tour = await _dbContext.Tours.FindAsync(Tour_id);
             if(tour != null)
@@ -95,7 +95,7 @@ namespace KarnelTravelAPI.Service
             {
                 _dbContext.Entry(Tour).State = EntityState.Modified;
                 await _dbContext.SaveChangesAsync();
-                return tour;
+                return Tour;
             }
             else
             {

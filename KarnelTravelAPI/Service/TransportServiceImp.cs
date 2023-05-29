@@ -74,7 +74,7 @@ namespace KarnelTravelAPI.Service
             {
                 databaseContext.Entry(Transport).State = EntityState.Modified;
                 await databaseContext.SaveChangesAsync();
-                return transport;
+                return Transport;
             }
             else
             {

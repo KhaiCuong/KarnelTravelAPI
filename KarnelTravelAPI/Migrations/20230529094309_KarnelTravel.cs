@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KarnelTravelAPI.Migrations
 {
-    public partial class eprojecttable : Migration
+    public partial class KarnelTravel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,8 +27,7 @@ namespace KarnelTravelAPI.Migrations
                 name: "Tours",
                 columns: table => new
                 {
-                    Tour_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tour_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Tour_name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status_tour = table.Column<bool>(type: "bit", nullable: false),
                     Discount = table.Column<int>(type: "int", nullable: true),
@@ -203,12 +202,12 @@ namespace KarnelTravelAPI.Migrations
                 name: "AccommodationTours",
                 columns: table => new
                 {
-                    Accommodation_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Tour_id = table.Column<int>(type: "int", nullable: false)
+                    Tour_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Accommodation_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccommodationTours", x => x.Accommodation_id);
+                    table.PrimaryKey("PK_AccommodationTours", x => new { x.Accommodation_id, x.Tour_id });
                     table.ForeignKey(
                         name: "FK_AccommodationTours_Accommodations_Accommodation_id",
                         column: x => x.Accommodation_id,
@@ -247,12 +246,12 @@ namespace KarnelTravelAPI.Migrations
                 name: "RestaurantTours",
                 columns: table => new
                 {
-                    Restaurant_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Tour_id = table.Column<int>(type: "int", nullable: false)
+                    Tour_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Restaurant_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RestaurantTours", x => x.Restaurant_id);
+                    table.PrimaryKey("PK_RestaurantTours", x => new { x.Restaurant_id, x.Tour_id });
                     table.ForeignKey(
                         name: "FK_RestaurantTours_Restaurants_Restaurant_id",
                         column: x => x.Restaurant_id,
@@ -291,12 +290,12 @@ namespace KarnelTravelAPI.Migrations
                 name: "TouristSpotTours",
                 columns: table => new
                 {
-                    TouristSpot_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Tour_id = table.Column<int>(type: "int", nullable: false)
+                    Tour_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TouristSpot_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TouristSpotTours", x => x.TouristSpot_id);
+                    table.PrimaryKey("PK_TouristSpotTours", x => new { x.TouristSpot_id, x.Tour_id });
                     table.ForeignKey(
                         name: "FK_TouristSpotTours_TouristSpots_TouristSpot_id",
                         column: x => x.TouristSpot_id,
@@ -319,7 +318,7 @@ namespace KarnelTravelAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     User_id = table.Column<int>(type: "int", nullable: false),
-                    Tour_id = table.Column<int>(type: "int", nullable: true),
+                    Tour_id = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Accommodation_id = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Restaurant_id = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TouristSpot_id = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -365,12 +364,12 @@ namespace KarnelTravelAPI.Migrations
                 name: "TransportTours",
                 columns: table => new
                 {
-                    Transport_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Tour_id = table.Column<int>(type: "int", nullable: false)
+                    Tour_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Transport_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TransportTours", x => x.Transport_id);
+                    table.PrimaryKey("PK_TransportTours", x => new { x.Transport_id, x.Tour_id });
                     table.ForeignKey(
                         name: "FK_TransportTours_Tours_Tour_id",
                         column: x => x.Tour_id,
@@ -389,7 +388,8 @@ namespace KarnelTravelAPI.Migrations
                 name: "Feedbacks",
                 columns: table => new
                 {
-                    Feedback_id = table.Column<int>(type: "int", nullable: false),
+                    Feedback_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rate = table.Column<int>(type: "int", nullable: false),
                     Status_Feedback = table.Column<bool>(type: "bit", nullable: false),
@@ -399,8 +399,8 @@ namespace KarnelTravelAPI.Migrations
                 {
                     table.PrimaryKey("PK_Feedbacks", x => x.Feedback_id);
                     table.ForeignKey(
-                        name: "FK_Feedbacks_Bookings_Feedback_id",
-                        column: x => x.Feedback_id,
+                        name: "FK_Feedbacks_Bookings_booking_id",
+                        column: x => x.booking_id,
                         principalTable: "Bookings",
                         principalColumn: "booking_id",
                         onDelete: ReferentialAction.Cascade);
@@ -476,6 +476,11 @@ namespace KarnelTravelAPI.Migrations
                 name: "IX_Bookings_User_id",
                 table: "Bookings",
                 column: "User_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_booking_id",
+                table: "Feedbacks",
+                column: "booking_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LocationImages_Location_id",

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KarnelTravelAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PaymentController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CustomResult<IEnumerable<PaymentModel>>>> GetTours()
+        public async Task<ActionResult<CustomResult<IEnumerable<PaymentModel>>>> GetPaymentList()
         {
             try
             {
@@ -73,7 +73,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomResult<PaymentModel>>> GetTour(int id)
+        public async Task<ActionResult<CustomResult<PaymentModel>>> GetPayment(int id)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomResult<PaymentModel>>> AddTour(PaymentModel payment)
+        public async Task<ActionResult<CustomResult<PaymentModel>>> AddPayment(PaymentModel payment)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace KarnelTravelAPI.Controllers
                 if (resource != null)
                 {
                     var response = new CustomResult<PaymentModel>(200, "Resource Created", payment, null);
-                    return CreatedAtAction(nameof(GetTour), new { id = payment.Payment_id }, payment);
+                    return CreatedAtAction(nameof(GetPayment), new { id = payment.Payment_id }, payment);
                 }
                 else
                 {

@@ -2,7 +2,7 @@
 {
     public class TransportTourModel
     {
-        public int Tour_id { get; set; }
+        public string Tour_id { get; set; }
         public virtual TourModel? Tours { get; set; }
         public string Transport_id { get; set; }
         public virtual TransportModel? Transports { get; set; }

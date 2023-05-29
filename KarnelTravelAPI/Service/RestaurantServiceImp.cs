@@ -73,7 +73,7 @@ namespace KarnelTravelAPI.Service
             {
                 _databaseContext.Entry(Restaurant).State = EntityState.Modified;
                 await _databaseContext.SaveChangesAsync();
-                return res;
+                return Restaurant;
             }
             else
             {

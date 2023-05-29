@@ -26,7 +26,7 @@ namespace KarnelTravelAPI.Model
 
         public int User_id { get; set; }
         public virtual UserModel? User { get; set; }
-        public int? Tour_id { get; set; }
+        public string? Tour_id { get; set; }
         public virtual TourModel? Tour { get; set; }
         public string? Accommodation_id { get; set; }
         public virtual AccommodationModel? Accommodation { get; set; }
