@@ -9,7 +9,7 @@ namespace KarnelTravelAPI.Model
 
         [Key]
         [Required]
-        public int Tour_id { get; set; }
+        public string Tour_id { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be 3-20 characters")]
         public string Tour_name { get; set; }

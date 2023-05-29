@@ -29,6 +29,8 @@
 
     <Folder Include="uploads\Locations\" />
 
+    <Folder Include="uploads\Locations\" />
+
     <Folder Include="uploads\Restaurant\" />
     <Folder Include="uploads\Accommodations\" />
 

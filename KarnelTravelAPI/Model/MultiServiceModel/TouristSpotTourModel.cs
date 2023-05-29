@@ -2,7 +2,7 @@
 {
     public class TouristSpotTourModel
     {
-        public int Tour_id { get; set; }
+        public string Tour_id { get; set; }
         public virtual TourModel? Tours { get; set; }
         public string TouristSpot_id { get; set; }
         public virtual TouristSpotModel? TouristSpots { get; set; }

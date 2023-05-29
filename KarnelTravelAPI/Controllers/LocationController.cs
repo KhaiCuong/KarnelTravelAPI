@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KarnelTravelAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LocationController : ControllerBase
     {
@@ -130,7 +130,7 @@ namespace KarnelTravelAPI.Controllers
                     var resourceUpdate = await _locationRepository.UpdateLocation(
                         location);
                     var response = new CustomResult<LocationModel>(200,
-                        "update employee successfully", resourceUpdate, null);
+                        "update employee successfully", location, null);
                     return Ok(response);
                 }
                 else

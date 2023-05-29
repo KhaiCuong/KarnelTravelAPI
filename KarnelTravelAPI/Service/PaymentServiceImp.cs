@@ -18,9 +18,9 @@ namespace KarnelTravelAPI.Service
             PaymentModel payment = await _dbContext.Payments.FirstOrDefaultAsync(a => a.Booking_id.Equals(Payment.Booking_id));
             if (payment == null)
             {
-                await _dbContext.Payments.AddAsync(payment);
+                await _dbContext.Payments.AddAsync(Payment);
                 await _dbContext.SaveChangesAsync();
-                return payment;
+                return Payment;
             }
             else
             {

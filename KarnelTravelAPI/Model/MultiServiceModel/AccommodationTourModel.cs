@@ -1,8 +1,11 @@
-﻿namespace KarnelTravelAPI.Model.MultiServiceModel
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KarnelTravelAPI.Model.MultiServiceModel
 {
     public class AccommodationTourModel
     {
-        public int Tour_id { get; set; }
+
+        public string Tour_id { get; set; }
         public virtual TourModel? Tours { get; set; }
         public string Accommodation_id { get; set; }
         public virtual AccommodationModel? Accommodations { get; set; }

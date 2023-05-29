@@ -45,7 +45,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpPut("{tour_id}")]
-        public async Task<ActionResult<CustomResult<IEnumerable<TourModel>>>> UpdateStatus(int tour_id)
+        public async Task<ActionResult<CustomResult<IEnumerable<TourModel>>>> UpdateStatus(string tour_id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomResult<TourModel>>> GetTour(int id)
+        public async Task<ActionResult<CustomResult<TourModel>>> GetTour(string id)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace KarnelTravelAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CustomResult<string>>> Deletetour(int id)
+        public async Task<ActionResult<CustomResult<string>>> Deletetour(string id)
         {
             bool resourceDeleted = false;
             var resource = await _tourRepository.GetTourById(id);

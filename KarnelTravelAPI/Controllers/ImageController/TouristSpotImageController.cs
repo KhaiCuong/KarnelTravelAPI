@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KarnelTravelAPI.Controllers.ImageController
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TouristSpotImageController : ControllerBase
     {
@@ -50,7 +50,7 @@ namespace KarnelTravelAPI.Controllers.ImageController
         }
 
 
-        [HttpPut("{id}")] // id = TouristSpot_Id
+        [HttpPost("{id}")] // id = TouristSpot_Id
         public async Task<ActionResult<CustomResult<bool>>> UpdateImageById(List<IFormFile> files, string id)
         {           
             try
@@ -58,12 +58,12 @@ namespace KarnelTravelAPI.Controllers.ImageController
                 var resources = await _repository.UpdateImg(files, id);
                 if (resources)
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(200, "Resource created", null, null);
+                    var response = new CustomResult<bool>(200, "Resource created", true, null);
                     return Ok(response);
                 }
                 else
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(404, "Not Resources Found", null, null);
+                    var response = new CustomResult<bool>(404, "Not Resources Found", false, null);
                     return NotFound(response);
                 }
             }
@@ -86,12 +86,12 @@ namespace KarnelTravelAPI.Controllers.ImageController
                 var resources = await _repository.AddImage(files, TouristSpot_Id);
                 if (resources)
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(200, "Resource created",null, null);
+                    var response = new CustomResult<bool>(200, "Resource created",true, null);
                     return Ok(response);
                 }
                 else
                 {
-                    var response = new CustomResult<IEnumerable<TouristSpotModel>>(404, "Not Resources Found", null, null);
+                    var response = new CustomResult<bool>(404, "Not Resources Found", false, null);
                     return NotFound(response);
                 }
             }
@@ -107,21 +107,19 @@ namespace KarnelTravelAPI.Controllers.ImageController
 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CustomResult<string>>> DeleteImages(string id)
+        public async Task<ActionResult<CustomResult<bool>>> DeleteImages(string id)
         {
-            bool resourceDeleted = false;
             var resource = await _repository.DeleteImage(id);
             if (resource != null)
             {
-
-                var response = new CustomResult<string>(200,
-                    "Resource deleted successfully", null, null);
+                var response = new CustomResult<bool>(200,
+                    "Resource deleted successfully", true, null);
                 return Ok(response);
             }
             else
             {
-                var response = new CustomResult<string>(200,
-                    "Resource not found or unable to delete", null, null);
+                var response = new CustomResult<bool>(400,
+                    "Resource not found or unable to delete", false, null);
                 return NotFound(response);
             }
 

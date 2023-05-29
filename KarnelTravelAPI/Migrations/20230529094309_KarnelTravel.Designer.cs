@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KarnelTravelAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230525150923_KarnelTravel")]
+    [Migration("20230529094309_KarnelTravel")]
     partial class KarnelTravel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,8 +80,8 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Restaurant_id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("Tour_id")
-                        .HasColumnType("int");
+                    b.Property<string>("Tour_id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TouristSpot_id")
                         .HasColumnType("nvarchar(450)");
@@ -112,7 +112,10 @@ namespace KarnelTravelAPI.Migrations
             modelBuilder.Entity("KarnelTravelAPI.Model.FeedbackModel", b =>
                 {
                     b.Property<int>("Feedback_id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Feedback_id"), 1L, 1);
 
                     b.Property<int>("Rate")
                         .HasColumnType("int");
@@ -127,6 +130,8 @@ namespace KarnelTravelAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Feedback_id");
+
+                    b.HasIndex("booking_id");
 
                     b.ToTable("Feedbacks");
                 });
@@ -249,10 +254,10 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Accommodation_id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Tour_id")
-                        .HasColumnType("int");
+                    b.Property<string>("Tour_id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Accommodation_id");
+                    b.HasKey("Accommodation_id", "Tour_id");
 
                     b.HasIndex("Tour_id");
 
@@ -264,10 +269,10 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Restaurant_id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Tour_id")
-                        .HasColumnType("int");
+                    b.Property<string>("Tour_id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Restaurant_id");
+                    b.HasKey("Restaurant_id", "Tour_id");
 
                     b.HasIndex("Tour_id");
 
@@ -279,10 +284,10 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("TouristSpot_id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Tour_id")
-                        .HasColumnType("int");
+                    b.Property<string>("Tour_id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("TouristSpot_id");
+                    b.HasKey("TouristSpot_id", "Tour_id");
 
                     b.HasIndex("Tour_id");
 
@@ -294,10 +299,10 @@ namespace KarnelTravelAPI.Migrations
                     b.Property<string>("Transport_id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Tour_id")
-                        .HasColumnType("int");
+                    b.Property<string>("Tour_id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Transport_id");
+                    b.HasKey("Transport_id", "Tour_id");
 
                     b.HasIndex("Tour_id");
 
@@ -404,11 +409,8 @@ namespace KarnelTravelAPI.Migrations
 
             modelBuilder.Entity("KarnelTravelAPI.Model.TourModel", b =>
                 {
-                    b.Property<int>("Tour_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Tour_id"), 1L, 1);
+                    b.Property<string>("Tour_id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Depature_date")
                         .HasColumnType("datetime2");
@@ -575,7 +577,7 @@ namespace KarnelTravelAPI.Migrations
                 {
                     b.HasOne("KarnelTravelAPI.Model.BookingModel", "Booking")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("Feedback_id")
+                        .HasForeignKey("booking_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
