@@ -17,14 +17,18 @@ namespace KarnelTravelAPI.Model
         public bool Status_tour { get; set; }
         public int? Discount { get; set; }
         [Required]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Depature_date { get; set; }
 
+
+
         [Required]
-        [Range(1, 100, ErrorMessage = "Quantity must be greater than 1")]
+        [Range(1, 10000000, ErrorMessage = "Times must be greater than 1")]
         public int Times { get; set; }
         [Required]
         [DataType(DataType.Currency)]
-        [Range(1, 100000000000, ErrorMessage = "Quantity must be greater than 1")]
+        [Range(1, 100000000000, ErrorMessage = "Price must be greater than 1")]
         public decimal Price { get; set; }
         public string? Description { get; set; }
 

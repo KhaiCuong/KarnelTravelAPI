@@ -46,14 +46,12 @@ namespace KarnelTravelAPI.Controllers
             }
         }
 
-
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CustomResult<BookingModel>>> GetBookingById(int id)
+        [HttpGet("{booking_id}")]
+        public async Task<ActionResult<CustomResult<BookingModel>>> GetBookingByBookingId(int booking_id)
         {
             try
             {
-                var resource = await _repository.GetBookingById(id);
+                var resource = await _repository.GetBookingByBookingId(booking_id);
                 if (resource == null)
                 {
                     var response = new CustomResult<BookingModel>(404,
@@ -63,6 +61,39 @@ namespace KarnelTravelAPI.Controllers
                 else
                 {
                     var response = new CustomResult<BookingModel>(200,
+                        "Get employee successfully", resource, null);
+
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, new CustomResult<BookingModel>()
+                {
+                    Message = "An error occurred while retrieving the model.",
+                    Error = ex.Message
+                });
+            }
+
+        }
+
+
+            [HttpGet("{id}")]
+        public async Task<ActionResult<CustomResult<IEnumerable<BookingModel>>>> GetBookingByUserId(int id)
+        {
+            try
+            {
+                var resource = await _repository.GetBookingById(id);
+                if (resource == null)
+                {
+                    var response = new CustomResult<IEnumerable<BookingModel>>(404,
+                        "Resource not found or unable to delete", null, null);
+                    return NotFound(response);
+                }
+                else
+                {
+                    var response = new CustomResult<IEnumerable<BookingModel>>(200,
                         "Get employee successfully", resource, null);
 
                     return Ok(response);
@@ -94,8 +125,7 @@ namespace KarnelTravelAPI.Controllers
                 {
                     var response = new CustomResult<BookingModel>(201, "Resource created",
                         Booking, null);
-                    return CreatedAtAction(nameof(GetBookingById), new { id = Booking.booking_id },
-                        Booking);
+                    return Ok();
 
                 }
                 else
