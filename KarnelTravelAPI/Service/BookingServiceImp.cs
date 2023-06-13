@@ -47,9 +47,24 @@ namespace KarnelTravelAPI.Service
             };
         }
 
-        public async Task<BookingModel> GetBookingById(int Booking_id)
+        public async Task<BookingModel> GetBookingByBookingId(int Booking_id)
         {
             BookingModel book = await _databaseContext.Bookings.FindAsync(Booking_id);
+
+            if (book != null)
+            {
+
+                return book;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<BookingModel>> GetBookingById(int Booking_id)
+        {
+            var book = await _databaseContext.Bookings.Where(a => a.User_id.Equals(Booking_id)).ToListAsync();
 
             if (book != null)
             {

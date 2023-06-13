@@ -23,7 +23,6 @@ namespace KarnelTravelAPI.Controllers
 
         [HttpGet]
         //[Route("Admins")]
-        [Authorize(Roles = $"{RoleModels.Admin}")]
         public async Task<ActionResult<CustomResult<IEnumerable<UserModel>>>> GetUsersAsync()
         {
             try

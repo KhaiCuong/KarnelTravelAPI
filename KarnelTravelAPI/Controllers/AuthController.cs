@@ -34,6 +34,7 @@ namespace KarnelTravelAPI.Controllers
                 var token = GenerateToken(user);
                 var userToken = new UserModel
                 {
+                    User_id = user.User_id,
                     Email = user.Email,
                     User_name = user.User_name,
                     Role = user.Role
