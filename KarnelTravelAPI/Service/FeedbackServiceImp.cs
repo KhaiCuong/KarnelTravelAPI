@@ -14,18 +14,18 @@ namespace KarnelTravelAPI.Service
         }
         public async Task<FeedbackModel> AddFeedback(FeedbackModel Feedback)
         {
-            var fb = await _databaseContext.Feedbacks.FirstOrDefaultAsync(p => p.booking_id.Equals(Feedback.booking_id));
-            if (fb == null)
-            {
+            //var fb = await _databaseContext.Feedbacks.FirstOrDefaultAsync(p => p.booking_id.Equals(Feedback.booking_id));
+            //if (fb == null)
+            //{
                 await _databaseContext.Feedbacks.AddAsync(Feedback);
                 await _databaseContext.SaveChangesAsync();
                 return Feedback;
 
-            }
-            else
-            {
-                return null;
-            }
+            //}
+            //else
+            //{
+            //    return null;
+            //}
         }
 
         public async Task<bool> DeleteFeedback(int Feedback_id)
