@@ -62,7 +62,7 @@ namespace KarnelTravelAPI.Controllers
             var token = new JwtSecurityToken(configuration["Jwt:Issuer"],
                 configuration["Jwt:Audience"],
                 claims,
-                expires: DateTime.Now.AddMinutes(15),
+                expires: DateTime.Now.AddMinutes(1440),
                 signingCredentials: credentials);
 
 
